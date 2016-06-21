@@ -12,7 +12,7 @@ I created a simple test module using SNAP that gives a visual for the RAT and AU
 * RAT: http://www.creativehuddle.co.uk/the-remote-associates-test
 * AUT: http://www.creativehuddle.co.uk/the-alternative-uses-test
 
-# Assets Used
+# Unity Assets Used
 * PBS Materials Variety Pack by Integrity Software & Games 
 * Abandoned Buildings by Aleksey Kozhemyakin 
 * Handpainted Keys by RoboCG 
