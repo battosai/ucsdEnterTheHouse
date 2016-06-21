@@ -6,7 +6,10 @@ Summer 2016 UCSD Research Experiment Game for Frontiers Science Journal
   Speculation of whether or not the narrow scenario "limits" or "less effectively boosts" will be looked at after data has been collected before, after, and during the game experiment.
 
 # Assets Used
-PBS Materials Variety Pack by Integrity Software & Games
-Abandoned Buildings by Aleksey Kozhemyakin
-Handpainted Keys by RoboCG
+PBS Materials Variety Pack by Integrity Software & Games 
+
+Abandoned Buildings by Aleksey Kozhemyakin 
+
+Handpainted Keys by RoboCG 
+
 Junk by UCSD
