@@ -8,6 +8,10 @@ Speculation of whether or not the narrow scenario "limits" or "less effectively 
 # SNAP: Simulation and Neuroscience Application Platform
 Link to repository: https://github.com/sccn/SNAP
 
+I created a simple test module using SNAP that gives a visual for the RAT and AUT (RAUT) tests that are used in this experiment. Here are two links for information about the Remote Associates Test (RAT) and the Alternative Uses Test (AUT) respectively.
+* RAT: http://www.creativehuddle.co.uk/the-remote-associates-test
+* AUT: http://www.creativehuddle.co.uk/the-alternative-uses-test
+
 # Assets Used
 * PBS Materials Variety Pack by Integrity Software & Games 
 * Abandoned Buildings by Aleksey Kozhemyakin 
