@@ -5,6 +5,9 @@ This experiment was to test if a subject's creativity could be affected by a gam
   
 Speculation of whether or not the narrow scenario "limits" or "less effectively boosts" will be looked at after data has been collected before, after, and during the game experiment.
 
+# SNAP: Simulation and Neuroscience Application Platform
+Link to repository: https://github.com/sccn/SNAP
+
 # Assets Used
 * PBS Materials Variety Pack by Integrity Software & Games 
 * Abandoned Buildings by Aleksey Kozhemyakin 
