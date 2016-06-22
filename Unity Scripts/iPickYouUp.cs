@@ -20,7 +20,7 @@ public class iPickYouUp : MonoBehaviour
 	{
 		if(handsAreFull)
 		{
-			hold(theHeld);
+			hold();
 			dropCheck();
 		}
 		else
@@ -29,11 +29,11 @@ public class iPickYouUp : MonoBehaviour
 		}
 	}
 	
-	void hold(GameObject holdme)
+	void hold()
 	{
 		//hold object at constant distance 
-		holdme.transform.position = Vector3.Lerp (holdme.transform.position, cameraman.transform.position + cameraman.transform.forward * distance, speed * Time.deltaTime);
-		//holdme.transform.position = cameraman.transform.position + cameraman.transform.forward * distance;
+		theHeld.transform.position = Vector3.Lerp (theHeld.transform.position, cameraman.transform.position + cameraman.transform.forward * distance, speed * Time.deltaTime);
+		//theHeld.transform.position = cameraman.transform.position + cameraman.transform.forward * distance;
 	}
 	
 	void dropCheck()
