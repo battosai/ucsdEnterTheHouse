@@ -16,4 +16,5 @@ I created a simple test module using SNAP that gives a visual for the RAT and AU
 * PBS Materials Variety Pack by Integrity Software & Games 
 * Abandoned Buildings by Aleksey Kozhemyakin 
 * Handpainted Keys by RoboCG 
+* Props for the Classroom by VR
 * Junk by UCSD
