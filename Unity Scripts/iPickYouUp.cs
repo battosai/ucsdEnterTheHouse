@@ -3,11 +3,11 @@ using System.Collections;
 
 public class iPickYouUp : MonoBehaviour 
 {
+	public float distance;
+	public float speed;
 	GameObject cameraman;
 	GameObject theHeld;
 	bool handsAreFull;
-	public float distance;
-	public float speed;
 	
 	// Use this for initialization
 	void Start() 
@@ -21,11 +21,16 @@ public class iPickYouUp : MonoBehaviour
 		if(handsAreFull)
 		{
 			hold();
-			dropCheck();
+			
+			//if E is pressed while holding an object, drop it
+			if(Input.GetKeyDown(KeyCode.E))
+				drop();
 		}
 		else
 		{
-			pickup();
+			//if E is pressed while empty-handed, pick it up
+			if(Input.GetKeyDown(KeyCode.E))
+				pickup();
 		}
 	}
 	
@@ -36,46 +41,35 @@ public class iPickYouUp : MonoBehaviour
 		//theHeld.transform.position = cameraman.transform.position + cameraman.transform.forward * distance;
 	}
 	
-	void dropCheck()
-	{
-		//if E is pressed while holding an object, drop it
-		if(Input.GetKeyDown(KeyCode.E) && handsAreFull)
-		{
-			drop();
-		}
-	}
-	
 	void drop()
 	{
-		//turn forces back on
+		//turn gravity back on
 		//point to empty object
 		handsAreFull = false;
-		theHeld.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+		theHeld.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		theHeld = null;
 	}
 	
 	void pickup()
 	{
-		//if E is pressed
-		if(Input.GetKeyDown(KeyCode.E))
+		int centerx = Screen.width/2;
+		int centery = Screen.height/2;
+		pickMeUp holdme;
+		
+		//see what's being aimed at within distance
+		Ray aim = cameraman.GetComponent<Camera>().ScreenPointToRay(new Vector3(centerx, centery));
+		RaycastHit hit;
+		
+		if(Physics.Raycast(aim, out hit, 4))
 		{
-			int centerx = Screen.width/2;
-			int centery = Screen.height/2;
-			pickMeUp holdme;
-			
-			//see what's being aimed at within distance
-			Ray aim = cameraman.GetComponent<Camera>().ScreenPointToRay(new Vector3(centerx, centery));
-			RaycastHit hit;
-			
-			if(Physics.Raycast(aim, out hit, 4))
+			holdme = hit.collider.GetComponent<pickMeUp>();
+			if(holdme != null)
 			{
-				holdme = hit.collider.GetComponent<pickMeUp>();
-				if(holdme != null)
-				{
-					handsAreFull = true;
-					theHeld = holdme.gameObject;
-					holdme.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-				}
+				//set distance to distance when picked up is
+				distance = Vector3.Distance(hit.collider.transform.position, transform.position);
+				handsAreFull = true;
+				theHeld = holdme.gameObject;
+				holdme.gameObject.GetComponent<Rigidbody>().useGravity = false;
 			}
 		}
 	}

@@ -37,7 +37,7 @@ public class doorUnlock : MonoBehaviour
 	void Update() 
 	{
 		//if in trigger and input is given
-		if(canUnlock && Input.GetKeyDown(KeyCode.Space))
+		if(canUnlock && Input.GetKeyDown(KeyCode.Space) && userInputEnabled)
 		{
 				userInputEnabled = false;
 				audio.PlayOneShot(unlockSound, 1);
