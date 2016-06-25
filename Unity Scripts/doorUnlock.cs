@@ -7,16 +7,17 @@ public class doorUnlock : MonoBehaviour
 	public bool userInputEnabled;
 	Camera mainCam;
 	Camera endCam;
-	AudioSource audio;
+	AudioSource stereo;
 	bool canUnlock;
 
 	// Use this for initialization
-	void Start()
+	void Awake()
 	{
 		mainCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 		endCam = GameObject.FindWithTag("EndCamera").GetComponent<Camera>();
+		endCam.GetComponent<AudioListener>().enabled = false;
 		endCam.enabled = false;
-		audio = GetComponent<AudioSource>();
+		stereo = GetComponent<AudioSource>();
 		canUnlock = false;
 		userInputEnabled = true;
 	}
@@ -40,7 +41,7 @@ public class doorUnlock : MonoBehaviour
 		if(canUnlock && Input.GetKeyDown(KeyCode.Space) && userInputEnabled)
 		{
 				userInputEnabled = false;
-				audio.PlayOneShot(unlockSound, 1);
+				stereo.PlayOneShot(unlockSound, 1);
 				mainCam.enabled = false;
 				endCam.enabled = true;
 				
