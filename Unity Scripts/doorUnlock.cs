@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class doorUnlock : MonoBehaviour 
 {	
@@ -40,14 +41,15 @@ public class doorUnlock : MonoBehaviour
 		//if in trigger and input is given
 		if(canUnlock && Input.GetKeyDown(KeyCode.Space) && userInputEnabled)
 		{
-				userInputEnabled = false;
-				stereo.PlayOneShot(unlockSound, 1);
-				mainCam.enabled = false;
-				endCam.enabled = true;
-				
-				//MIGHT NEED TO MOVE IF IT SIMULTANEOUSLY DOES THIS ALL...
-				//needs to quit after playing the sound in a black screen
-				Application.Quit();
+			GameObject.FindWithTag("Controls").GetComponent<Text>().enabled = false;
+			userInputEnabled = false;
+			stereo.PlayOneShot(unlockSound, 1);
+			mainCam.enabled = false;
+			endCam.enabled = true;
+			
+			//MIGHT NEED TO MOVE IF IT SIMULTANEOUSLY DOES THIS ALL...
+			//needs to quit after playing the sound in a black screen
+			Application.Quit();
 		}
 	}
 }

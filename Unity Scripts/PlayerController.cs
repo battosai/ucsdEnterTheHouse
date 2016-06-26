@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
-public class PlayerController_WASD : MonoBehaviour 
+public class PlayerController : MonoBehaviour 
 {
 	public AudioClip footsteps;
 	public float mouseSpeed;
 	public float moveSpeed;
 	
+	GameObject controls;
 	AudioSource stereo;
 	bool moveFwd;
 	bool moveBwd;
@@ -17,6 +19,8 @@ public class PlayerController_WASD : MonoBehaviour
 	void Awake()
 	{
 		stereo = GetComponent<AudioSource>();
+		controls = GameObject.FindWithTag("Controls");
+		controls.GetComponent<Text>().text = "Controls [Close with Tab]\nWASD - Movement\nMouse - Camera Control\nE - Pick Item Up\nSpace - Open Door\n";
 		footstepsOn = false;
 	}
 	
@@ -51,18 +55,28 @@ public class PlayerController_WASD : MonoBehaviour
 	
 	void Update()
 	{	
-		//if sound isn't playing and we're walking, play sound
-		if((moveFwd || moveBwd || moveLeft || moveRight) && !footstepsOn)
+		bool inputEnabled = GameObject.FindWithTag("Door").GetComponent<doorUnlock>().userInputEnabled;
+	
+		if(inputEnabled)
 		{
-			footstepsOn = true;
-			stereo.clip = footsteps;
-			stereo.Play();
-		}
-		//pause if sound is playing and we've stopped walking
-		else if(!moveFwd && !moveBwd && !moveLeft && !moveRight && footstepsOn)
-		{
-			stereo.Pause();
-			footstepsOn = false;
+			//if sound isn't playing and we're walking, play sound
+			if((moveFwd || moveBwd || moveLeft || moveRight) && !footstepsOn)
+			{
+				footstepsOn = true;
+				stereo.clip = footsteps;
+				stereo.Play();
+			}
+			//pause if sound is playing and we've stopped walking
+			else if(!moveFwd && !moveBwd && !moveLeft && !moveRight && footstepsOn)
+			{
+				stereo.Pause();
+				footstepsOn = false;
+			}
+			
+			if(Input.GetKeyDown(KeyCode.Tab))
+			{
+				controls.GetComponent<Text>().enabled = !controls.GetComponent<Text>().enabled;
+			}
 		}
 	}
 }
