@@ -67,9 +67,12 @@ public class iPickYouUp : MonoBehaviour
 		if(Physics.Raycast(aim, out hit, 4))
 		{
 			holdme = hit.collider.GetComponent<pickMeUp>();
+			
+			//if aiming at the key, destroy it and raise the key flag
 			if(holdme.gameObject == theKey)
 			{
 				Destroy(theKey);
+				theKey = null;
 				hasKey = true;
 				return;
 			}

@@ -37,9 +37,9 @@ public class doorUnlock : MonoBehaviour
 		
 		if(Physics.Raycast(aim, out hit, 4))
 		{
+			//check if object hit is the door and that player has the key
 			if(hit.transform.gameObject == theDoor && canUnlock)
 			{
-				//Debug.Log("ITS ALIVE");
 				GameObject.FindWithTag("Controls").GetComponent<Text>().enabled = false;
 				userInputEnabled = false;
 				stereo.PlayOneShot(unlockSound, 1);
@@ -50,9 +50,9 @@ public class doorUnlock : MonoBehaviour
 				//needs to quit after playing the sound in a black screen
 				Application.Quit();
 			}
+			//if the player is aiming at the door but does not have the key
 			else if(hit.transform.gameObject == theDoor && !canUnlock)
 			{
-				//Debug.Log("Good try lad");
 				stereo.PlayOneShot(lockedOut, 1);
 			}
 		}
