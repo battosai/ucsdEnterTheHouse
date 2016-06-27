@@ -5,14 +5,18 @@ public class iPickYouUp : MonoBehaviour
 {
 	public float distance;
 	public float speed;
+	public bool hasKey;
 	GameObject cameraman;
 	GameObject theHeld;
+	GameObject theKey;
 	bool handsAreFull;
 	
 	// Use this for initialization
-	void Start() 
+	void Awake() 
 	{
 		cameraman = GameObject.FindWithTag("MainCamera");
+		theKey = GameObject.FindWithTag("Key");
+		hasKey = false;
 	}
 	
 	// Update is called once per frame
@@ -63,6 +67,13 @@ public class iPickYouUp : MonoBehaviour
 		if(Physics.Raycast(aim, out hit, 4))
 		{
 			holdme = hit.collider.GetComponent<pickMeUp>();
+			if(holdme.gameObject == theKey)
+			{
+				Destroy(theKey);
+				hasKey = true;
+				return;
+			}
+			
 			if(holdme != null)
 			{
 				//set distance to distance when picked up is

@@ -5,7 +5,9 @@ using UnityEngine.UI;
 public class doorUnlock : MonoBehaviour 
 {	
 	public AudioClip unlockSound;
+	public AudioClip lockedOut;
 	public bool userInputEnabled;
+	GameObject theDoor;
 	Camera mainCam;
 	Camera endCam;
 	AudioSource stereo;
@@ -16,6 +18,7 @@ public class doorUnlock : MonoBehaviour
 	{
 		mainCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 		endCam = GameObject.FindWithTag("EndCamera").GetComponent<Camera>();
+		theDoor = GameObject.FindWithTag("Door");
 		endCam.GetComponent<AudioListener>().enabled = false;
 		endCam.enabled = false;
 		stereo = GetComponent<AudioSource>();
@@ -23,33 +26,46 @@ public class doorUnlock : MonoBehaviour
 		userInputEnabled = true;
 	}
 	
-	void OnTriggerEnter(Collider other)
+	void openDoor()
 	{
-		if(other.transform.tag == "Key")
-			canUnlock = true;
-	}
-	
-	void OnTriggerExit(Collider other)
-	{
-		if(other.transform.tag == "Key")
-			canUnlock = false;
+		//NEW METHOD USING RAY
+		int centerx = Screen.width/2;
+		int centery = Screen.height/2;
+		
+		Ray aim = mainCam.ScreenPointToRay(new Vector3(centerx, centery));
+		RaycastHit hit;
+		
+		if(Physics.Raycast(aim, out hit, 4))
+		{
+			if(hit.transform.gameObject == theDoor && canUnlock)
+			{
+				//Debug.Log("ITS ALIVE");
+				GameObject.FindWithTag("Controls").GetComponent<Text>().enabled = false;
+				userInputEnabled = false;
+				stereo.PlayOneShot(unlockSound, 1);
+				mainCam.enabled = false;
+				endCam.enabled = true;
+				
+				//MIGHT NEED TO MOVE IF IT SIMULTANEOUSLY DOES THIS ALL...
+				//needs to quit after playing the sound in a black screen
+				Application.Quit();
+			}
+			else if(hit.transform.gameObject == theDoor && !canUnlock)
+			{
+				//Debug.Log("Good try lad");
+				stereo.PlayOneShot(lockedOut, 1);
+			}
+		}
 	}
 	
 	// Update is called once per frame
 	void Update() 
 	{
-		//if in trigger and input is given
-		if(canUnlock && Input.GetKeyDown(KeyCode.Space) && userInputEnabled)
+		canUnlock = GameObject.FindWithTag("Player").GetComponent<iPickYouUp>().hasKey;
+		
+		if(Input.GetKeyDown(KeyCode.Space) && userInputEnabled)
 		{
-			GameObject.FindWithTag("Controls").GetComponent<Text>().enabled = false;
-			userInputEnabled = false;
-			stereo.PlayOneShot(unlockSound, 1);
-			mainCam.enabled = false;
-			endCam.enabled = true;
-			
-			//MIGHT NEED TO MOVE IF IT SIMULTANEOUSLY DOES THIS ALL...
-			//needs to quit after playing the sound in a black screen
-			Application.Quit();
+			openDoor();
 		}
 	}
 }
