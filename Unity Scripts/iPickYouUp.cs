@@ -5,10 +5,11 @@ public class iPickYouUp : MonoBehaviour
 {
 	public float distance;
 	public float speed;
-	public bool hasKey;
+	public bool hasKey, hasClue1;
 	GameObject cameraman;
 	GameObject theHeld;
 	GameObject theKey;
+	GameObject firstClue;
 	bool handsAreFull;
 	
 	// Use this for initialization
@@ -16,7 +17,12 @@ public class iPickYouUp : MonoBehaviour
 	{
 		cameraman = GameObject.FindWithTag("MainCamera");
 		theKey = GameObject.FindWithTag("Key");
+		theKey.GetComponent<Renderer>().enabled = false;
+		theKey.GetComponent<Collider>().enabled = false;
+		theKey.GetComponent<Rigidbody>().useGravity = false;
+		firstClue = GameObject.FindWithTag("clue1");
 		hasKey = false;
+		hasClue1 = false;
 	}
 	
 	// Update is called once per frame
@@ -68,16 +74,25 @@ public class iPickYouUp : MonoBehaviour
 		{
 			holdme = hit.collider.GetComponent<pickMeUp>();
 			
+			//if first clue
+			if(holdme.gameObject == firstClue)
+			{
+				Destroy(firstClue);
+				firstClue = null;
+				hasClue1 = true;
+				theKey.GetComponent<Renderer>().enabled = true;
+				theKey.GetComponent<Collider>().enabled = true;
+				theKey.GetComponent<Rigidbody>().useGravity = true;
+			}
 			//if aiming at the key, destroy it and raise the key flag
-			if(holdme.gameObject == theKey)
+			else if(holdme.gameObject == theKey)
 			{
 				Destroy(theKey);
 				theKey = null;
 				hasKey = true;
-				return;
 			}
-			
-			if(holdme != null)
+			//if any object that isn't essential
+			else if(holdme != null)
 			{
 				//set distance to distance when picked up is
 				distance = Vector3.Distance(hit.collider.transform.position, transform.position);

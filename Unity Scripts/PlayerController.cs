@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 	{
 		stereo = GetComponent<AudioSource>();
 		controls = GameObject.FindWithTag("Controls");
-		controls.GetComponent<Text>().text = "Controls [Close with Tab]\nWASD - Movement\nMouse - Camera Control\nE - Pick Item Up\nSpace - Open Door\n";
+		controls.GetComponent<Text>().text =   "Controls [Close with Tab]\nWASD  - Movement\nMouse - Camera Control\nE 	        - Pick Item Up\nSpace  - Open Door\n";
 		footstepsOn = false;
 	}
 	

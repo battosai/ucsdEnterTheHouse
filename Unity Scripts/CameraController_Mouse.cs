@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraController_Mouse : MonoBehaviour {
-	
+public class CameraController_Mouse : MonoBehaviour 
+{
 	public GameObject player;
 	private Vector3 offset;
 	public float mouseSpeed;
