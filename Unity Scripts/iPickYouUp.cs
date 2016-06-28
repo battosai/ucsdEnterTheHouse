@@ -5,11 +5,11 @@ public class iPickYouUp : MonoBehaviour
 {
 	public float distance;
 	public float speed;
-	public bool hasKey, hasClue1;
+	public bool hasKey, hasClue1, hasClue2, hasClue3;
 	GameObject cameraman;
 	GameObject theHeld;
 	GameObject theKey;
-	GameObject firstClue;
+	GameObject firstClue, secondClue, thirdClue;
 	bool handsAreFull;
 	
 	// Use this for initialization
@@ -20,9 +20,21 @@ public class iPickYouUp : MonoBehaviour
 		theKey.GetComponent<Renderer>().enabled = false;
 		theKey.GetComponent<Collider>().enabled = false;
 		theKey.GetComponent<Rigidbody>().useGravity = false;
+		
 		firstClue = GameObject.FindWithTag("clue1");
+		
+		secondClue = GameObject.FindWithTag("clue2");
+		secondClue.GetComponent<Renderer>().enabled = false;
+		secondClue.GetComponent<Collider>().enabled = false;
+		
+		thirdClue = GameObject.FindWithTag("clue3");
+		thirdClue.GetComponent<Renderer>().enabled = false;
+		thirdClue.GetComponent<Collider>().enabled = false;
+		
 		hasKey = false;
 		hasClue1 = false;
+		hasClue2 = false;
+		hasClue3 = false;
 	}
 	
 	// Update is called once per frame
@@ -73,13 +85,30 @@ public class iPickYouUp : MonoBehaviour
 		if(Physics.Raycast(aim, out hit, 4))
 		{
 			holdme = hit.collider.GetComponent<pickMeUp>();
-			
 			//if first clue
 			if(holdme.gameObject == firstClue)
 			{
 				Destroy(firstClue);
 				firstClue = null;
 				hasClue1 = true;
+				secondClue.GetComponent<Renderer>().enabled = true;
+				secondClue.GetComponent<Collider>().enabled = true;
+			}
+			//if second clue
+			else if(holdme.gameObject == secondClue)
+			{
+				Destroy(secondClue);
+				secondClue = null;
+				hasClue2 = true;
+				thirdClue.GetComponent<Renderer>().enabled = true;
+				thirdClue.GetComponent<Collider>().enabled = true;
+			}
+			//if third clue
+			else if(holdme.gameObject == thirdClue)
+			{
+				Destroy(thirdClue);
+				thirdClue = null;
+				hasClue3 = true;
 				theKey.GetComponent<Renderer>().enabled = true;
 				theKey.GetComponent<Collider>().enabled = true;
 				theKey.GetComponent<Rigidbody>().useGravity = true;

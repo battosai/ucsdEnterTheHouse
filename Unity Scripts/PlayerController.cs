@@ -7,21 +7,26 @@ public class PlayerController : MonoBehaviour
 	public AudioClip footsteps;
 	public float mouseSpeed;
 	public float moveSpeed;
+	public AudioSource stereo;
 	
 	GameObject controls;
-	AudioSource stereo;
 	bool moveFwd;
 	bool moveBwd;
 	bool moveLeft;
 	bool moveRight;
 	bool footstepsOn;
+	bool menuOn;
+	
+	string closedMenuText = "Press [Tab] for Menu";
+	string openedMenuText = "Controls [Close with Tab]\nWASD  - Movement\nMouse - Camera Control\nE 	        - Pick Item Up\nSpace  - Open Door\n";
 	
 	void Awake()
 	{
 		stereo = GetComponent<AudioSource>();
 		controls = GameObject.FindWithTag("Controls");
-		controls.GetComponent<Text>().text =   "Controls [Close with Tab]\nWASD  - Movement\nMouse - Camera Control\nE 	        - Pick Item Up\nSpace  - Open Door\n";
+		controls.GetComponent<Text>().text = closedMenuText;
 		footstepsOn = false;
+		menuOn = false;
 	}
 	
 	void FixedUpdate() //called just before any physics operations; physics code
@@ -75,7 +80,12 @@ public class PlayerController : MonoBehaviour
 			
 			if(Input.GetKeyDown(KeyCode.Tab))
 			{
-				controls.GetComponent<Text>().enabled = !controls.GetComponent<Text>().enabled;
+				if(menuOn)
+					controls.GetComponent<Text>().text = closedMenuText;
+				else
+					controls.GetComponent<Text>().text = openedMenuText;
+				
+				menuOn = !menuOn;
 			}
 		}
 	}

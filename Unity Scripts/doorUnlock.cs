@@ -8,6 +8,7 @@ public class doorUnlock : MonoBehaviour
 	public AudioClip lockedOut;
 	public bool userInputEnabled;
 	GameObject theDoor;
+	GameObject player;
 	Camera mainCam;
 	Camera endCam;
 	AudioSource stereo;
@@ -19,6 +20,7 @@ public class doorUnlock : MonoBehaviour
 		mainCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 		endCam = GameObject.FindWithTag("EndCamera").GetComponent<Camera>();
 		theDoor = GameObject.FindWithTag("Door");
+		player = GameObject.FindWithTag("Player");
 		endCam.GetComponent<AudioListener>().enabled = false;
 		endCam.enabled = false;
 		stereo = GetComponent<AudioSource>();
@@ -40,6 +42,7 @@ public class doorUnlock : MonoBehaviour
 			//check if object hit is the door and that player has the key
 			if(hit.transform.gameObject == theDoor && canUnlock)
 			{
+				player.GetComponent<PlayerController>().stereo.Pause();
 				GameObject.FindWithTag("Controls").GetComponent<Text>().enabled = false;
 				userInputEnabled = false;
 				stereo.PlayOneShot(unlockSound, 1);
