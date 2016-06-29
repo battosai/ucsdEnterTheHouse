@@ -6,10 +6,16 @@ public class iPickYouUp : MonoBehaviour
 	public float distance;
 	public float speed;
 	public bool hasKey, hasClue1, hasClue2, hasClue3;
+	public AudioClip paperPickUp;
+	public AudioClip keyPickUp;
+	
 	GameObject cameraman;
 	GameObject theHeld;
 	GameObject theKey;
 	GameObject firstClue, secondClue, thirdClue;
+	
+	AudioSource soundEffects;
+	
 	bool handsAreFull;
 	
 	// Use this for initialization
@@ -30,6 +36,8 @@ public class iPickYouUp : MonoBehaviour
 		thirdClue = GameObject.FindWithTag("clue3");
 		thirdClue.GetComponent<Renderer>().enabled = false;
 		thirdClue.GetComponent<Collider>().enabled = false;
+		
+		soundEffects = GameObject.FindWithTag("SoundFX").GetComponent<AudioSource>();
 		
 		hasKey = false;
 		hasClue1 = false;
@@ -93,6 +101,8 @@ public class iPickYouUp : MonoBehaviour
 				hasClue1 = true;
 				secondClue.GetComponent<Renderer>().enabled = true;
 				secondClue.GetComponent<Collider>().enabled = true;
+				soundEffects.clip = paperPickUp;
+				soundEffects.Play();
 			}
 			//if second clue
 			else if(holdme.gameObject == secondClue)
@@ -102,6 +112,8 @@ public class iPickYouUp : MonoBehaviour
 				hasClue2 = true;
 				thirdClue.GetComponent<Renderer>().enabled = true;
 				thirdClue.GetComponent<Collider>().enabled = true;
+				soundEffects.clip = paperPickUp;
+				soundEffects.Play();
 			}
 			//if third clue
 			else if(holdme.gameObject == thirdClue)
@@ -112,6 +124,8 @@ public class iPickYouUp : MonoBehaviour
 				theKey.GetComponent<Renderer>().enabled = true;
 				theKey.GetComponent<Collider>().enabled = true;
 				theKey.GetComponent<Rigidbody>().useGravity = true;
+				soundEffects.clip = paperPickUp;
+				soundEffects.Play();
 			}
 			//if aiming at the key, destroy it and raise the key flag
 			else if(holdme.gameObject == theKey)
@@ -119,6 +133,8 @@ public class iPickYouUp : MonoBehaviour
 				Destroy(theKey);
 				theKey = null;
 				hasKey = true;
+				soundEffects.clip = keyPickUp;
+				soundEffects.Play();
 			}
 			//if any object that isn't essential
 			else if(holdme != null)

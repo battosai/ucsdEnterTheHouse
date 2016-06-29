@@ -9,16 +9,16 @@ public class PlayerController : MonoBehaviour
 	public float moveSpeed;
 	public AudioSource stereo;
 	public Texture clue1, clue2, clue3, controlPage;
+	public bool menuOn;
+	public RawImage currPage;
 	
 	GameObject controls;
-	RawImage currPage;
-	//Texture2D currPage;
+	
 	bool moveFwd;
 	bool moveBwd;
 	bool moveLeft;
 	bool moveRight;
 	bool footstepsOn;
-	bool menuOn;
 	
 	string closedMenuText = "Press [Tab] for Menu";
 	string openedMenuText = "";
@@ -28,13 +28,13 @@ public class PlayerController : MonoBehaviour
 		stereo = GetComponent<AudioSource>();
 		
 		controls = GameObject.FindWithTag("Controls");
-		controls.GetComponent<Text>().text = closedMenuText;
+		controls.GetComponent<Text>().text = openedMenuText;
 		currPage = GameObject.FindWithTag("Pages").GetComponent<RawImage>();
 		currPage.texture = controlPage;
-		currPage.enabled = false;
+		currPage.enabled = true;
 		
 		footstepsOn = false;
-		menuOn = false;
+		menuOn = true;
 	}
 	
 	void Start()
@@ -95,24 +95,14 @@ public class PlayerController : MonoBehaviour
 			
 			if(Input.GetKeyDown(KeyCode.Tab))
 			{
-				//turning off
-				if(menuOn)
-				{
-					controls.GetComponent<Text>().text = closedMenuText;
-					currPage.texture = controlPage;
-				}
-				//turning on
-				else
-				{
-					controls.GetComponent<Text>().text = openedMenuText;
-				}
-				
 				menuOn = !menuOn;
 				currPage.enabled = menuOn;
 			}
 			
 			if(menuOn)
 			{
+				controls.GetComponent<Text>().text = openedMenuText;
+				
 				if(Input.GetKeyDown(KeyCode.Alpha1))
 				{
 					currPage.texture = controlPage;
@@ -129,6 +119,11 @@ public class PlayerController : MonoBehaviour
 				{
 					currPage.texture = clue3;
 				}
+			}
+			else
+			{
+				currPage.texture = controlPage;
+				controls.GetComponent<Text>().text = closedMenuText;
 			}
 		}
 	}

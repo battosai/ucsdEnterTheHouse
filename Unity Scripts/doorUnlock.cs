@@ -43,6 +43,7 @@ public class doorUnlock : MonoBehaviour
 			if(hit.transform.gameObject == theDoor && canUnlock)
 			{
 				player.GetComponent<PlayerController>().stereo.Pause();
+				player.GetComponent<PlayerController>().currPage.enabled = false;
 				GameObject.FindWithTag("Controls").GetComponent<Text>().enabled = false;
 				userInputEnabled = false;
 				stereo.PlayOneShot(unlockSound, 1);
