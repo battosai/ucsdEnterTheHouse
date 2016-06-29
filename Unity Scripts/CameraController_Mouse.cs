@@ -22,6 +22,8 @@ public class CameraController_Mouse : MonoBehaviour
 	void FixedUpdate()
 	{	
 		xRotation -= Input.GetAxis("Mouse Y") * mouseSpeed * Time.deltaTime;
+		xRotation = Mathf.Clamp(xRotation, -50, 55);
+		
 		yRotation += Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
 		transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
 	}
