@@ -48,10 +48,7 @@ public class doorUnlock : MonoBehaviour
 				stereo.PlayOneShot(unlockSound, 1);
 				mainCam.enabled = false;
 				endCam.enabled = true;
-				
-				//MIGHT NEED TO MOVE IF IT SIMULTANEOUSLY DOES THIS ALL...
-				//needs to quit after playing the sound in a black screen
-				Application.Quit();
+				Invoke("endGame", 6);
 			}
 			//if the player is aiming at the door but does not have the key
 			else if(hit.transform.gameObject == theDoor && !canUnlock)
@@ -59,6 +56,11 @@ public class doorUnlock : MonoBehaviour
 				stereo.PlayOneShot(lockedOut, 1);
 			}
 		}
+	}
+	
+	void endGame()
+	{
+		Application.Quit();
 	}
 	
 	// Update is called once per frame

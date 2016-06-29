@@ -8,8 +8,11 @@ public class PlayerController : MonoBehaviour
 	public float mouseSpeed;
 	public float moveSpeed;
 	public AudioSource stereo;
+	public Texture clue1, clue2, clue3, controlPage;
 	
 	GameObject controls;
+	RawImage currPage;
+	//Texture2D currPage;
 	bool moveFwd;
 	bool moveBwd;
 	bool moveLeft;
@@ -18,15 +21,24 @@ public class PlayerController : MonoBehaviour
 	bool menuOn;
 	
 	string closedMenuText = "Press [Tab] for Menu";
-	string openedMenuText = "Controls [Close with Tab]\nWASD  - Movement\nMouse - Camera Control\nE 	        - Pick Item Up\nSpace  - Open Door\n";
+	string openedMenuText = "";
 	
 	void Awake()
 	{
 		stereo = GetComponent<AudioSource>();
+		
 		controls = GameObject.FindWithTag("Controls");
 		controls.GetComponent<Text>().text = closedMenuText;
+		currPage = GameObject.FindWithTag("Pages").GetComponent<RawImage>();
+		currPage.texture = controlPage;
+		currPage.enabled = false;
+		
 		footstepsOn = false;
 		menuOn = false;
+	}
+	
+	void Start()
+	{
 	}
 	
 	void FixedUpdate() //called just before any physics operations; physics code
@@ -61,6 +73,9 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{	
 		bool inputEnabled = GameObject.FindWithTag("Door").GetComponent<doorUnlock>().userInputEnabled;
+		bool hasClue1 = GetComponent<iPickYouUp>().hasClue1;
+		bool hasClue2 = GetComponent<iPickYouUp>().hasClue2;
+		bool hasClue3 = GetComponent<iPickYouUp>().hasClue3;
 	
 		if(inputEnabled)
 		{
@@ -80,12 +95,40 @@ public class PlayerController : MonoBehaviour
 			
 			if(Input.GetKeyDown(KeyCode.Tab))
 			{
+				//turning off
 				if(menuOn)
+				{
 					controls.GetComponent<Text>().text = closedMenuText;
+					currPage.texture = controlPage;
+				}
+				//turning on
 				else
+				{
 					controls.GetComponent<Text>().text = openedMenuText;
+				}
 				
 				menuOn = !menuOn;
+				currPage.enabled = menuOn;
+			}
+			
+			if(menuOn)
+			{
+				if(Input.GetKeyDown(KeyCode.Alpha1))
+				{
+					currPage.texture = controlPage;
+				}
+				else if(Input.GetKeyDown(KeyCode.Alpha2) && hasClue1)
+				{
+					currPage.texture = clue1;
+				}
+				else if(Input.GetKeyDown(KeyCode.Alpha3) && hasClue2)
+				{
+					currPage.texture = clue2;
+				}
+				else if(Input.GetKeyDown(KeyCode.Alpha4) && hasClue3)
+				{
+					currPage.texture = clue3;
+				}
 			}
 		}
 	}

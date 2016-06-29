@@ -9,6 +9,11 @@ public class CameraController_Mouse : MonoBehaviour
 	public Texture2D crosshairImage;
 	public float xRotation, yRotation;
 	
+	void Awake()
+	{
+		Cursor.visible = false;
+	}
+	
 	void Start()
 	{
 		offset = transform.position - player.transform.position;
