@@ -13,8 +13,17 @@ I created a simple test module using SNAP that gives a visual for the RAT and AU
 * AUT: http://www.creativehuddle.co.uk/the-alternative-uses-test
 
 # Unity Assets Used
-* PBS Materials Variety Pack by Integrity Software & Games 
 * Abandoned Buildings by Aleksey Kozhemyakin 
+* Alchemy Station by David Stenfors
+* Damaged Old Car by VIS Games
+* Dumpster by Rakshi Games
 * Handpainted Keys by RoboCG 
-* Props for the Classroom by VR
 * Junk by UCSD
+* Medieval Gold by Mister Necturus
+* PBS Materials Variety Pack by Integrity Software & Games 
+* Post-Apocalyptic Truck by Valga Games
+* Props for the Classroom by VR
+* Ruined Car by 000734
+* Small Town America - Streets by MultiFlagStudios
+* Storage Building by Gooseman's Graphics
+* Construction Site Pack by Alex McDonnell
