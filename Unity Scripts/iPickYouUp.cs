@@ -6,17 +6,16 @@ public class iPickYouUp : MonoBehaviour
 	public float distance;
 	public float speed;
 	public bool hasKey, hasClue1, hasClue2, hasClue3;
+	public bool handsAreFull;
 	public AudioClip paperPickUp;
 	public AudioClip keyPickUp;
 	
 	GameObject cameraman;
-	GameObject theHeld;
+	public GameObject theHeld;
 	GameObject theKey;
 	GameObject firstClue, secondClue, thirdClue;
 	
 	AudioSource soundEffects;
-	
-	bool handsAreFull;
 	
 	// Use this for initialization
 	void Awake() 
