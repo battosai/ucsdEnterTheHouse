@@ -20,17 +20,15 @@ public class iThrowYou : MonoBehaviour
 		theHeld = pickUpScript.theHeld;
 
 		//if holding an object and Space is pressed, toss it
-		if (handsAreFull) 
+		if (handsAreFull && Input.GetKeyDown(KeyCode.Space)) 
 		{
-			if (Input.GetKeyDown (KeyCode.Space)) 
-			{
-				toss();
-			}
+			toss();
 		}
 	}
 
 	void toss()
 	{
+		//apply force, let iPickYouUp know it's not being held
 		pickUpScript.handsAreFull = false;
 		pickUpScript.theHeld.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		theHeld.GetComponent<Rigidbody>().AddForce (transform.forward * power); 
