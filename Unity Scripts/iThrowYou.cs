@@ -8,10 +8,12 @@ public class iThrowYou : MonoBehaviour
 	iPickYouUp pickUpScript;
 	GameObject theHeld;
 	bool handsAreFull;
+	bool thrown;
 
 	void Awake()
 	{
 		pickUpScript = GetComponent<iPickYouUp>();
+		thrown = false;
 	}
 
 	void Update()
@@ -23,8 +25,17 @@ public class iThrowYou : MonoBehaviour
 		if (handsAreFull && Input.GetKeyDown(KeyCode.Space)) 
 		{
 			toss();
+			thrown = true;
 		}
+
+		if (thrown) 
+		{
+			impactCheck();
+		}
+
 	}
+
+	void impactCheck();
 
 	void toss()
 	{
@@ -32,6 +43,8 @@ public class iThrowYou : MonoBehaviour
 		pickUpScript.handsAreFull = false;
 		pickUpScript.theHeld.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		theHeld.GetComponent<Rigidbody>().AddForce (transform.forward * power); 
+
+		//do this once impact noise has been made, move this line later
 		pickUpScript.theHeld = null;
 	}
 }
