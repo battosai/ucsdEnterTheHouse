@@ -15,25 +15,42 @@ public class impactSounds : MonoBehaviour
 	public int objectID;
 
 	bool makeSounds;
+	bool continuousRun;
+	bool thrown;
+	GameObject player;
+	GameObject theThrown;
 	AudioSource impactStereo;
 
 	void Awake()
 	{
-		impactStereo = GameObject.FindWithTag("Player").GetComponent<iThrowYou>().stereo;
+		player = GameObject.FindWithTag("Player");
+		impactStereo = player.GetComponent<iThrowYou>().stereo;
+		makeSounds = false;
+		thrown = false;
+		continuousRun = false;
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
+		makeSounds = true;
 	}
 
 	void OnTriggerExit(Collider other)
 	{
-		
+		makeSounds = false;
+		continuousRun = false;
 	}
 
 	// Update is called once per frame
 	void Update() 
 	{
-		
+		theThrown = player.GetComponent<iThrowYou>().theThrown;
+		thrown = player.GetComponent<iThrowYou>().thrown;
+
+		if (thrown && makeSounds && !continuousRun) 
+		{
+			print ("I MAKE SOUNDS");
+			continuousRun = true;
+		}
 	}
 }
