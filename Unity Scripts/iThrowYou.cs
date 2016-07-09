@@ -3,23 +3,34 @@ using System.Collections;
 
 public class iThrowYou : MonoBehaviour 
 {
+	public bool thrown;
 	public float power;
+	public AudioClip impact;
+	public AudioSource stereo;
 
 	iPickYouUp pickUpScript;
-	GameObject theHeld;
+	public GameObject theThrown;
 	bool handsAreFull;
-	bool thrown;
 
 	void Awake()
 	{
+		stereo = GameObject.FindWithTag("SoundFX").GetComponent<AudioSource>();
 		pickUpScript = GetComponent<iPickYouUp>();
 		thrown = false;
+	}
+
+	void FixedUpdate()
+	{
+		if(thrown) 
+		{
+			
+		}
 	}
 
 	void Update()
 	{
 		handsAreFull = pickUpScript.handsAreFull;
-		theHeld = pickUpScript.theHeld;
+		theThrown = pickUpScript.theHeld;
 
 		//if holding an object and Space is pressed, toss it
 		if (handsAreFull && Input.GetKeyDown(KeyCode.Space)) 
@@ -27,24 +38,13 @@ public class iThrowYou : MonoBehaviour
 			toss();
 			thrown = true;
 		}
-
-		if (thrown) 
-		{
-			impactCheck();
-		}
-
 	}
-
-	void impactCheck();
 
 	void toss()
 	{
 		//apply force, let iPickYouUp know it's not being held
 		pickUpScript.handsAreFull = false;
 		pickUpScript.theHeld.gameObject.GetComponent<Rigidbody>().useGravity = true;
-		theHeld.GetComponent<Rigidbody>().AddForce (transform.forward * power); 
-
-		//do this once impact noise has been made, move this line later
-		pickUpScript.theHeld = null;
+		theThrown.GetComponent<Rigidbody>().AddForce(transform.forward * power); 
 	}
 }
