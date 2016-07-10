@@ -6,9 +6,10 @@ public class iThrowYou : MonoBehaviour
 	public bool thrown;
 	public float power;
 	public GameObject theThrown;
-	public AudioClip impact;
-	public AudioSource stereo;
+	public AudioClip hollowThump;
+	public AudioClip woodThump;
 
+	AudioSource stereo;
 	iPickYouUp pickUpScript;
 	bool handsAreFull;
 
@@ -28,7 +29,6 @@ public class iThrowYou : MonoBehaviour
 		if (handsAreFull && Input.GetKeyDown(KeyCode.Space)) 
 		{
 			toss();
-			thrown = true;
 		}
 
 		if (thrown) 
@@ -42,7 +42,8 @@ public class iThrowYou : MonoBehaviour
 		//apply force, let iPickYouUp know it's not being held
 		pickUpScript.handsAreFull = false;
 		pickUpScript.theHeld.gameObject.GetComponent<Rigidbody>().useGravity = true;
-		theThrown.GetComponent<Rigidbody>().AddForce(transform.forward * power); 
+		theThrown.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse); 
+		thrown = true;
 	}
 
 	void speedCheck()

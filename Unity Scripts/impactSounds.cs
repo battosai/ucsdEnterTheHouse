@@ -14,43 +14,48 @@ public class impactSounds : MonoBehaviour
      */
 	public int objectID;
 
-	bool makeSounds;
-	bool continuousRun;
-	bool thrown;
 	GameObject player;
 	GameObject theThrown;
 	AudioSource impactStereo;
+	AudioClip woodThump;
+	AudioClip hollowThump;
 
 	void Awake()
 	{
 		player = GameObject.FindWithTag("Player");
-		impactStereo = player.GetComponent<iThrowYou>().stereo;
-		makeSounds = false;
-		thrown = false;
-		continuousRun = false;
+		impactStereo = GameObject.FindWithTag("SoundFX").GetComponent<AudioSource>();
+		theThrown = player.GetComponent<iThrowYou>().theThrown;
+		hollowThump = player.GetComponent<iThrowYou>().hollowThump;
+		woodThump = player.GetComponent<iThrowYou>().woodThump;
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnCollisionEnter(Collision other)
 	{
-		makeSounds = true;
-	}
-
-	void OnTriggerExit(Collider other)
-	{
-		makeSounds = false;
-		continuousRun = false;
+		switch (objectID) 
+		{
+		case 1:
+			impactStereo.PlayOneShot (woodThump, 1);
+			break;
+		case 2:
+			impactStereo.PlayOneShot (hollowThump, 1);
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			impactStereo.PlayOneShot (hollowThump, 1);
+			break;
+		case 7:
+			impactStereo.PlayOneShot (hollowThump, 1);
+			break;
+		}
 	}
 
 	// Update is called once per frame
 	void Update() 
 	{
-		theThrown = player.GetComponent<iThrowYou>().theThrown;
-		thrown = player.GetComponent<iThrowYou>().thrown;
-
-		if (thrown && makeSounds && !continuousRun) 
-		{
-			print ("I MAKE SOUNDS");
-			continuousRun = true;
-		}
 	}
 }
