@@ -17,7 +17,7 @@ Both: PlayerController, CameraController_Mouse, pickMeUp, doorUnlock
 
 Broad: (entryPoints), broadPickup, iThrowYou, impactSounds
 
-Narrow: iPickYouUp,  iThrowYou, (narrowImpactSounds)
+Narrow: iPickYouUp, (narrowImpactSounds)
 
 # Unity Assets Used
 * Abandoned Buildings by Aleksey Kozhemyakin 
