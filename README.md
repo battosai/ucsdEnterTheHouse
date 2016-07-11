@@ -13,8 +13,9 @@ I created a simple test module using SNAP that gives a visual for the RAT and AU
 * AUT: http://www.creativehuddle.co.uk/the-alternative-uses-test
 
 #Scenario Scripts
-Broad:  PlayerController, CameraController_Mouse, pickMeUp, (entryPoints), broadPickup, broadThrowYou, (broadImpactSounds)
-Narrow: PlayerController, CameraController_Mouse, pickMeUp, doorUnlock,    iPickYouUp,  iThrowYou,     impactSounds
+Both: PlayerController, CameraController_Mouse, pickMeUp
+Broad: (entryPoints), broadPickup, broadThrowYou, (broadImpactSounds)
+Narrow: doorUnlock,    iPickYouUp,  iThrowYou,     impactSounds
 
 # Unity Assets Used
 * Abandoned Buildings by Aleksey Kozhemyakin 
