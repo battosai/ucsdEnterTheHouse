@@ -12,12 +12,17 @@ I created a simple test module using SNAP that gives a visual for the RAT and AU
 * RAT: http://www.creativehuddle.co.uk/the-remote-associates-test
 * AUT: http://www.creativehuddle.co.uk/the-alternative-uses-test
 
+#Scenario Scripts
+Broad:  PlayerController, CameraController_Mouse, pickMeUp, (entryPoints), broadPickup, broadThrowYou, (broadImpactSounds)
+Narrow: PlayerController, CameraController_Mouse, pickMeUp, doorUnlock,    iPickYouUp,  iThrowYou,     impactSounds
+
 # Unity Assets Used
 * Abandoned Buildings by Aleksey Kozhemyakin 
 * Alchemy Station by David Stenfors
 * Construction Site Pack by Alex McDonnell
 * Damaged Old Car by VIS Games
 * Dumpster by Rakshi Games
+* Free Steel Ladder Pack by Surpent
 * Handpainted Keys by RoboCG 
 * Junk by UCSD
 * Medieval Gold by Mister Necturus
