@@ -3,7 +3,6 @@ using System.Collections;
 
 public class iThrowYou : MonoBehaviour 
 {
-	public bool thrown;
 	public float power;
 	public GameObject theThrown;
 	public AudioClip hollowThump;
@@ -11,15 +10,13 @@ public class iThrowYou : MonoBehaviour
 	public AudioClip mattressThump;
 	public AudioClip plasticThump;
 
-	AudioSource stereo;
-	iPickYouUp pickUpScript;
+	broadPickUp pickUpScript;
+
 	bool handsAreFull;
 
 	void Awake()
 	{
-		stereo = GameObject.FindWithTag("SoundFX").GetComponent<AudioSource>();
-		pickUpScript = GetComponent<iPickYouUp>();
-		thrown = false;
+		pickUpScript = GetComponent<broadPickUp>();
 	}
 
 	void Update()
@@ -32,11 +29,6 @@ public class iThrowYou : MonoBehaviour
 		{
 			toss();
 		}
-
-		if (thrown) 
-		{
-			speedCheck();
-		}
 	}
 
 	void toss()
@@ -45,17 +37,5 @@ public class iThrowYou : MonoBehaviour
 		pickUpScript.handsAreFull = false;
 		pickUpScript.theHeld.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		theThrown.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse); 
-		thrown = true;
-	}
-
-	void speedCheck()
-	{
-		Vector3 speed = theThrown.gameObject.GetComponent<Rigidbody>().velocity;
-
-		if (speed.x == 0 && speed.y == 0 && speed.z == 0) 
-		{
-			print ("i'm not moving");
-			thrown = false;
-		}
 	}
 }

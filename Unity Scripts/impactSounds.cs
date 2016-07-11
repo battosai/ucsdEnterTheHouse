@@ -15,7 +15,6 @@ public class impactSounds : MonoBehaviour
 	public int objectID;
 
 	GameObject player;
-	GameObject theThrown;
 	AudioSource impactStereo;
 	AudioClip woodThump;
 	AudioClip hollowThump;
@@ -26,7 +25,6 @@ public class impactSounds : MonoBehaviour
 	{
 		player = GameObject.FindWithTag("Player");
 		impactStereo = GameObject.FindWithTag("SoundFX").GetComponent<AudioSource>();
-		theThrown = player.GetComponent<iThrowYou>().theThrown;
 		hollowThump = player.GetComponent<iThrowYou>().hollowThump;
 		woodThump = player.GetComponent<iThrowYou>().woodThump;
 		mattressThump = player.GetComponent<iThrowYou>().mattressThump;

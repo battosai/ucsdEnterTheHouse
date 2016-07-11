@@ -1,56 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class iPickYouUp : MonoBehaviour 
+public class broadPickUp : MonoBehaviour 
 {
 	public float distance;
 	public float speed;
-	public bool hasKey, hasClue1, hasClue2, hasClue3;
 	public bool handsAreFull;
 	public AudioClip paperPickUp;
-	public AudioClip keyPickUp;
 	public GameObject theHeld;
-	
+
+	Texture found1, found2, found3;
+	Texture clue1, clue2, clue3;
 	GameObject cameraman;
-	GameObject theKey;
 	GameObject firstClue, secondClue, thirdClue;
-	
+
 	AudioSource soundEffects;
-	
+
 	// Use this for initialization
 	void Awake() 
 	{
+		clue1 = GetComponent<PlayerController> ().clue1;
+		clue2 = GetComponent<PlayerController> ().clue2;
+		clue3 = GetComponent<PlayerController> ().clue3;
 		cameraman = GameObject.FindWithTag("MainCamera");
-		theKey = GameObject.FindWithTag("Key");
-		theKey.GetComponent<Renderer>().enabled = false;
-		theKey.GetComponent<Collider>().enabled = false;
-		theKey.GetComponent<Rigidbody>().useGravity = false;
-		
 		firstClue = GameObject.FindWithTag("clue1");
-		
 		secondClue = GameObject.FindWithTag("clue2");
-		secondClue.GetComponent<Renderer>().enabled = false;
-		secondClue.GetComponent<Collider>().enabled = false;
-		
 		thirdClue = GameObject.FindWithTag("clue3");
-		thirdClue.GetComponent<Renderer>().enabled = false;
-		thirdClue.GetComponent<Collider>().enabled = false;
-		
 		soundEffects = GameObject.FindWithTag("SoundFX").GetComponent<AudioSource>();
-		
-		hasKey = false;
-		hasClue1 = false;
-		hasClue2 = false;
-		hasClue3 = false;
 	}
-	
+
 	// Update is called once per frame
 	void Update() 
 	{
+		found1 = GetComponent<PlayerController>().found1;
+		found2 = GetComponent<PlayerController>().found2;
+		found3 = GetComponent<PlayerController>().found3;
+
 		if(handsAreFull)
 		{
 			hold();
-			
+
 			//if E is pressed while holding an object, drop it
 			if(Input.GetKeyDown(KeyCode.E))
 				drop();
@@ -62,14 +51,13 @@ public class iPickYouUp : MonoBehaviour
 				pickup();
 		}
 	}
-	
+
 	void hold()
 	{
 		//hold object at constant distance 
 		theHeld.transform.position = Vector3.Lerp (theHeld.transform.position, cameraman.transform.position + cameraman.transform.forward * distance, speed * Time.deltaTime);
-		//theHeld.transform.position = cameraman.transform.position + cameraman.transform.forward * distance;
 	}
-	
+
 	void drop()
 	{
 		//turn gravity back on
@@ -78,17 +66,17 @@ public class iPickYouUp : MonoBehaviour
 		theHeld.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		theHeld = null;
 	}
-	
+
 	void pickup()
 	{
 		int centerx = Screen.width/2;
 		int centery = Screen.height/2;
 		pickMeUp holdme;
-		
+
 		//see what's being aimed at within distance
 		Ray aim = cameraman.GetComponent<Camera>().ScreenPointToRay(new Vector3(centerx, centery));
 		RaycastHit hit;
-		
+
 		if(Physics.Raycast(aim, out hit, 4))
 		{
 			holdme = hit.collider.GetComponent<pickMeUp>();
@@ -98,51 +86,32 @@ public class iPickYouUp : MonoBehaviour
 			{
 				if (holdme.gameObject == firstClue) 
 				{
+					clueOrder (clue1);
 					Destroy (firstClue);
 					firstClue = null;
-					hasClue1 = true;
-					secondClue.GetComponent<Renderer>().enabled = true;
-					secondClue.GetComponent<Collider>().enabled = true;
 					GetComponent<PlayerController>().clueNum++;
-					GetComponent<PlayerController>().found1 = GetComponent<PlayerController>().clue1;
 					soundEffects.clip = paperPickUp;
 					soundEffects.Play();
 				}
 				//if second clue
 				else if (holdme.gameObject == secondClue) 
 				{
+					clueOrder (clue2);
 					Destroy (secondClue);
 					secondClue = null;
-					hasClue2 = true;
-					thirdClue.GetComponent<Renderer>().enabled = true;
-					thirdClue.GetComponent<Collider>().enabled = true;
-					GetComponent<PlayerController> ().clueNum++;
-					GetComponent<PlayerController>().found2 = GetComponent<PlayerController>().clue2;
+					GetComponent<PlayerController>().clueNum++;
 					soundEffects.clip = paperPickUp;
 					soundEffects.Play();
 				}
 				//if third clue
 				else if (holdme.gameObject == thirdClue) 
 				{
+					clueOrder (clue3);
 					Destroy (thirdClue);
 					thirdClue = null;
-					hasClue3 = true;
-					GetComponent<PlayerController> ().clueNum++;
-					theKey.GetComponent<Renderer>().enabled = true;
-					theKey.GetComponent<Collider>().enabled = true;
-					theKey.GetComponent<Rigidbody>().useGravity = true;
-					GetComponent<PlayerController>().found3 = GetComponent<PlayerController>().clue3;
+					GetComponent<PlayerController>().clueNum++;
 					soundEffects.clip = paperPickUp;
 					soundEffects.Play();
-				}
-				//if aiming at the key, destroy it and raise the key flag
-				else if (holdme.gameObject == theKey) 
-				{
-					Destroy (theKey);
-					theKey = null;
-					hasKey = true;
-					soundEffects.clip = keyPickUp;
-					soundEffects.Play ();
 				}
 				//if any object that isn't essential
 				else 
@@ -154,6 +123,38 @@ public class iPickYouUp : MonoBehaviour
 					holdme.gameObject.GetComponent<Rigidbody> ().useGravity = false;
 				}
 			}
+		}
+	}
+
+	void clueOrder(Texture clue)
+	{
+		if (found1 == null) 
+		{
+			assignClue (clue, 1);
+		} 
+		else if (found2 == null) 
+		{
+			assignClue (clue, 2);
+		} 
+		else if(found3 == null)
+		{
+			assignClue (clue, 3);
+		}
+	}
+
+	void assignClue(Texture clue, int found)
+	{
+		switch (found) 
+		{
+		case 1:
+			GetComponent<PlayerController> ().found1 = clue;
+			break;
+		case 2:
+			GetComponent<PlayerController> ().found2 = clue;
+			break;
+		case 3:
+			GetComponent<PlayerController> ().found3 = clue;
+			break;
 		}
 	}
 }

@@ -7,8 +7,10 @@ public class PlayerController : MonoBehaviour
 	public AudioClip footsteps;
 	public float mouseSpeed;
 	public float moveSpeed;
+	public int clueNum;
 	public AudioSource stereo;
 	public Texture clue1, clue2, clue3, controlPage;
+	public Texture found1, found2, found3;
 	public bool menuOn;
 	public RawImage currPage;
 	
@@ -34,9 +36,14 @@ public class PlayerController : MonoBehaviour
 		currPage = GameObject.FindWithTag("Pages").GetComponent<RawImage>();
 		currPage.texture = controlPage;
 		currPage.enabled = true;
+
+		found1 = null;
+		found2 = null;
+		found3 = null;
 		
 		footstepsOn = false;
 		menuOn = true;
+		clueNum = 1;
 	}
 	
 	void Start()
@@ -75,27 +82,6 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{	
 		bool inputEnabled = GameObject.FindWithTag("Door").GetComponent<doorUnlock>().userInputEnabled;
-		bool hasClue1 = GetComponent<iPickYouUp>().hasClue1;
-		bool hasClue2 = GetComponent<iPickYouUp>().hasClue2;
-		bool hasClue3 = GetComponent<iPickYouUp>().hasClue3;
-		int totalPageNum;
-		
-		if(hasClue3)
-		{
-			totalPageNum = 4;
-		}
-		else if(hasClue2)
-		{
-			totalPageNum = 3;
-		}
-		else if(hasClue1)
-		{
-			totalPageNum = 2;
-		}
-		else
-		{
-			totalPageNum = 1;
-		}
 	
 		if(inputEnabled)
 		{
@@ -119,36 +105,36 @@ public class PlayerController : MonoBehaviour
 				currPage.enabled = menuOn;
 				
 				if(menuOn)
-					pageNum.GetComponent<Text>().text = "1/" + totalPageNum;
+					pageNum.GetComponent<Text>().text = "1/" + clueNum;
 			}
 			
 			if(menuOn)
 			{
 				controls.GetComponent<Text>().text = openedMenuText;
 				
-				if(Input.GetKeyDown(KeyCode.Alpha1) || (!hasClue1 && !hasClue2 && !hasClue3))
+				if(Input.GetKeyDown(KeyCode.Alpha1) || clueNum == 1)
 				{
-					pageNum.GetComponent<Text>().text = "1/" + totalPageNum;
+					pageNum.GetComponent<Text>().text = "1/" + clueNum;
 					currPage.texture = controlPage;
 				}
-				else if(Input.GetKeyDown(KeyCode.Alpha2) && hasClue1)
+				else if(Input.GetKeyDown(KeyCode.Alpha2) && clueNum >= 2)
 				{
-					pageNum.GetComponent<Text>().text = "2/" + totalPageNum;
-					currPage.texture = clue1;
+					pageNum.GetComponent<Text>().text = "2/" + clueNum;
+					currPage.texture = found1;
 				}
-				else if(Input.GetKeyDown(KeyCode.Alpha3) && hasClue2)
+				else if(Input.GetKeyDown(KeyCode.Alpha3) && clueNum >= 3)
 				{
-					pageNum.GetComponent<Text>().text = "3/" + totalPageNum;
-					currPage.texture = clue2;
+					pageNum.GetComponent<Text>().text = "3/" + clueNum;
+					currPage.texture = found2;
 				}
-				else if(Input.GetKeyDown(KeyCode.Alpha4) && hasClue3)
+				else if(Input.GetKeyDown(KeyCode.Alpha4) && clueNum >= 4)
 				{
-					pageNum.GetComponent<Text>().text = "4/" + totalPageNum;
-					currPage.texture = clue3;
+					pageNum.GetComponent<Text>().text = "4/" + clueNum;
+					currPage.texture = found3;
 				}
 				
 				pageNum.GetComponent<Text>().text = pageNum.GetComponent<Text>().text.Substring(0, pageNum.GetComponent<Text>().text.Length - 1);
-				pageNum.GetComponent<Text>().text += totalPageNum;
+				pageNum.GetComponent<Text>().text += clueNum;
 			}
 			else
 			{
