@@ -14,7 +14,9 @@ I created a simple test module using SNAP that gives a visual for the RAT and AU
 
 #Scenario Scripts
 Both: PlayerController, CameraController_Mouse, pickMeUp
+
 Broad: (entryPoints), broadPickup, broadThrowYou, (broadImpactSounds)
+
 Narrow: doorUnlock,    iPickYouUp,  iThrowYou,     impactSounds
 
 # Unity Assets Used
