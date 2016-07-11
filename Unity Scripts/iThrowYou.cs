@@ -8,6 +8,8 @@ public class iThrowYou : MonoBehaviour
 	public GameObject theThrown;
 	public AudioClip hollowThump;
 	public AudioClip woodThump;
+	public AudioClip mattressThump;
+	public AudioClip plasticThump;
 
 	AudioSource stereo;
 	iPickYouUp pickUpScript;

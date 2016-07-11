@@ -19,6 +19,8 @@ public class impactSounds : MonoBehaviour
 	AudioSource impactStereo;
 	AudioClip woodThump;
 	AudioClip hollowThump;
+	AudioClip mattressThump;
+	AudioClip plasticThump;
 
 	void Awake()
 	{
@@ -27,6 +29,8 @@ public class impactSounds : MonoBehaviour
 		theThrown = player.GetComponent<iThrowYou>().theThrown;
 		hollowThump = player.GetComponent<iThrowYou>().hollowThump;
 		woodThump = player.GetComponent<iThrowYou>().woodThump;
+		mattressThump = player.GetComponent<iThrowYou>().mattressThump;
+		plasticThump = player.GetComponent<iThrowYou>().plasticThump;
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -42,14 +46,15 @@ public class impactSounds : MonoBehaviour
 		case 3:
 			break;
 		case 4:
+			impactStereo.PlayOneShot (plasticThump, 1);
 			break;
 		case 5:
+			impactStereo.PlayOneShot (mattressThump, 1);
 			break;
 		case 6:
 			impactStereo.PlayOneShot (hollowThump, 1);
 			break;
 		case 7:
-			impactStereo.PlayOneShot (hollowThump, 1);
 			break;
 		}
 	}

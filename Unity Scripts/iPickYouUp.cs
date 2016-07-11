@@ -92,57 +92,61 @@ public class iPickYouUp : MonoBehaviour
 		if(Physics.Raycast(aim, out hit, 4))
 		{
 			holdme = hit.collider.GetComponent<pickMeUp>();
+
 			//if first clue
-			if(holdme.gameObject == firstClue)
+			if (holdme.gameObject != null) 
 			{
-				Destroy(firstClue);
-				firstClue = null;
-				hasClue1 = true;
-				secondClue.GetComponent<Renderer>().enabled = true;
-				secondClue.GetComponent<Collider>().enabled = true;
-				soundEffects.clip = paperPickUp;
-				soundEffects.Play();
-			}
-			//if second clue
-			else if(holdme.gameObject == secondClue)
-			{
-				Destroy(secondClue);
-				secondClue = null;
-				hasClue2 = true;
-				thirdClue.GetComponent<Renderer>().enabled = true;
-				thirdClue.GetComponent<Collider>().enabled = true;
-				soundEffects.clip = paperPickUp;
-				soundEffects.Play();
-			}
-			//if third clue
-			else if(holdme.gameObject == thirdClue)
-			{
-				Destroy(thirdClue);
-				thirdClue = null;
-				hasClue3 = true;
-				theKey.GetComponent<Renderer>().enabled = true;
-				theKey.GetComponent<Collider>().enabled = true;
-				theKey.GetComponent<Rigidbody>().useGravity = true;
-				soundEffects.clip = paperPickUp;
-				soundEffects.Play();
-			}
-			//if aiming at the key, destroy it and raise the key flag
-			else if(holdme.gameObject == theKey)
-			{
-				Destroy(theKey);
-				theKey = null;
-				hasKey = true;
-				soundEffects.clip = keyPickUp;
-				soundEffects.Play();
-			}
-			//if any object that isn't essential
-			else if(holdme != null)
-			{
-				//set distance to distance when picked up is
-				distance = Vector3.Distance(hit.collider.transform.position, transform.position);
-				handsAreFull = true;
-				theHeld = holdme.gameObject;
-				holdme.gameObject.GetComponent<Rigidbody>().useGravity = false;
+				if (holdme.gameObject == firstClue) 
+				{
+					Destroy (firstClue);
+					firstClue = null;
+					hasClue1 = true;
+					secondClue.GetComponent<Renderer>().enabled = true;
+					secondClue.GetComponent<Collider>().enabled = true;
+					soundEffects.clip = paperPickUp;
+					soundEffects.Play();
+				}
+				//if second clue
+				else if (holdme.gameObject == secondClue) 
+				{
+					Destroy (secondClue);
+					secondClue = null;
+					hasClue2 = true;
+					thirdClue.GetComponent<Renderer>().enabled = true;
+					thirdClue.GetComponent<Collider>().enabled = true;
+					soundEffects.clip = paperPickUp;
+					soundEffects.Play();
+				}
+				//if third clue
+				else if (holdme.gameObject == thirdClue) 
+				{
+					Destroy (thirdClue);
+					thirdClue = null;
+					hasClue3 = true;
+					theKey.GetComponent<Renderer>().enabled = true;
+					theKey.GetComponent<Collider>().enabled = true;
+					theKey.GetComponent<Rigidbody>().useGravity = true;
+					soundEffects.clip = paperPickUp;
+					soundEffects.Play();
+				}
+				//if aiming at the key, destroy it and raise the key flag
+				else if (holdme.gameObject == theKey) 
+				{
+					Destroy (theKey);
+					theKey = null;
+					hasKey = true;
+					soundEffects.clip = keyPickUp;
+					soundEffects.Play ();
+				}
+				//if any object that isn't essential
+				else 
+				{
+					//set distance to distance when picked up is
+					distance = Vector3.Distance (hit.collider.transform.position, transform.position);
+					handsAreFull = true;
+					theHeld = holdme.gameObject;
+					holdme.gameObject.GetComponent<Rigidbody> ().useGravity = false;
+				}
 			}
 		}
 	}
