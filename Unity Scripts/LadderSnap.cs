@@ -5,7 +5,7 @@ public class LadderSnap : MonoBehaviour
 {
 	public int snapID;
 
-	bool snap;
+	public bool snap;
 	bool handsAreFull;
 	GameObject theHeld;
 
@@ -47,7 +47,7 @@ public class LadderSnap : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject == theLadder) 
+		if (other.gameObject == theLadder && theHeld == theLadder && handsAreFull) 
 		{
 			snap = true;
 			swapLadders ();
@@ -59,14 +59,15 @@ public class LadderSnap : MonoBehaviour
 		if (other.gameObject == theLadder) 
 		{
 			snap = false;
+			restoreLadders ();
 		}
 	}
 
-	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		theLadderPos = theLadder.transform.position;
 		handsAreFull = GameObject.FindWithTag ("Player").GetComponent<broadPickUp> ().handsAreFull;
+		theHeld = GameObject.FindWithTag ("Player").GetComponent<broadPickUp> ().theHeld;
 
 		if (snap) 
 		{
@@ -90,8 +91,7 @@ public class LadderSnap : MonoBehaviour
 		{
 			LadderChildRenderer.enabled = false;
 		}
-		//theLadderCollider.isTrigger = true;
-		theLadderCollider.enabled = false;
+		theLadderCollider.isTrigger = true;
 		theLadder.GetComponent<Rigidbody> ().isKinematic = true;
 
 		foreach (Renderer dummyChildRenderer in dummyLadderRenderer) 
@@ -117,5 +117,21 @@ public class LadderSnap : MonoBehaviour
 
 		dummyLadder.transform.position = dummyLadderPos;
 		dummyLadder.transform.rotation = dummyLadderRot;
+	}
+
+	void restoreLadders()
+	{
+		foreach (Renderer dummyChildRenderer in dummyLadderRenderer) 
+		{
+			dummyChildRenderer.enabled = false;
+		}
+		dummyLadderCollider.enabled = false;
+
+		foreach (Renderer LadderChildRenderer in theLadderRenderer) 
+		{
+			LadderChildRenderer.enabled = true;
+		}	
+		theLadderCollider.isTrigger = false;
+		theLadder.GetComponent<Rigidbody> ().isKinematic = false;
 	}
 }

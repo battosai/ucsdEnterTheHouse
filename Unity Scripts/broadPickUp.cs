@@ -13,6 +13,8 @@ public class broadPickUp : MonoBehaviour
 	Texture clue1, clue2, clue3;
 	GameObject cameraman;
 	GameObject firstClue, secondClue, thirdClue;
+	GameObject dummyLadder;
+	GameObject theLadder;
 
 	AudioSource soundEffects;
 
@@ -22,6 +24,8 @@ public class broadPickUp : MonoBehaviour
 		clue1 = GetComponent<PlayerController> ().clue1;
 		clue2 = GetComponent<PlayerController> ().clue2;
 		clue3 = GetComponent<PlayerController> ().clue3;
+		dummyLadder = GameObject.FindWithTag ("dummyLadder");
+		theLadder = GameObject.FindWithTag ("Ladder");
 		cameraman = GameObject.FindWithTag("MainCamera");
 		firstClue = GameObject.FindWithTag("clue1");
 		secondClue = GameObject.FindWithTag("clue2");
@@ -84,34 +88,38 @@ public class broadPickUp : MonoBehaviour
 			//if first clue
 			if (holdme.gameObject != null) 
 			{
-				if (holdme.gameObject == firstClue) 
-				{
+				if (holdme.gameObject == firstClue) {
 					clueOrder (clue1);
 					Destroy (firstClue);
 					firstClue = null;
-					GetComponent<PlayerController>().clueNum++;
+					GetComponent<PlayerController> ().clueNum++;
 					soundEffects.clip = paperPickUp;
-					soundEffects.Play();
+					soundEffects.Play ();
 				}
 				//if second clue
-				else if (holdme.gameObject == secondClue) 
-				{
+				else if (holdme.gameObject == secondClue) {
 					clueOrder (clue2);
 					Destroy (secondClue);
 					secondClue = null;
-					GetComponent<PlayerController>().clueNum++;
+					GetComponent<PlayerController> ().clueNum++;
 					soundEffects.clip = paperPickUp;
-					soundEffects.Play();
+					soundEffects.Play ();
 				}
 				//if third clue
-				else if (holdme.gameObject == thirdClue) 
-				{
+				else if (holdme.gameObject == thirdClue) {
 					clueOrder (clue3);
 					Destroy (thirdClue);
 					thirdClue = null;
-					GetComponent<PlayerController>().clueNum++;
+					GetComponent<PlayerController> ().clueNum++;
 					soundEffects.clip = paperPickUp;
-					soundEffects.Play();
+					soundEffects.Play ();
+				} 
+				else if (holdme.gameObject == dummyLadder) 
+				{
+					theHeld = theLadder;
+					distance = Vector3.Distance (hit.collider.transform.position, transform.position);
+					holdme.gameObject.GetComponent<Rigidbody> ().useGravity = false;
+					handsAreFull = true;
 				}
 				//if any object that isn't essential
 				else 
