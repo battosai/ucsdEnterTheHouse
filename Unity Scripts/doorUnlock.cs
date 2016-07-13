@@ -59,7 +59,7 @@ public class doorUnlock : MonoBehaviour
 		}
 	}
 	
-	void endGame()
+	public void endGame()
 	{
 		Application.Quit();
 	}
