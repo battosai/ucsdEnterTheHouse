@@ -4,6 +4,7 @@ using System.Collections;
 public class entryPoints : MonoBehaviour 
 {
 	bool userInputEnabled;
+	bool ladderIsReady;
 	Camera endCam;
 	Camera mainCam;
 	AudioSource doorStereo;

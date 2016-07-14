@@ -85,9 +85,9 @@ public class broadPickUp : MonoBehaviour
 		{
 			holdme = hit.collider.GetComponent<pickMeUp>();
 
-			//if first clue
 			if (holdme.gameObject != null) 
 			{
+				//if first clue
 				if (holdme.gameObject == firstClue) {
 					clueOrder (clue1);
 					Destroy (firstClue);
@@ -114,6 +114,7 @@ public class broadPickUp : MonoBehaviour
 					soundEffects.clip = paperPickUp;
 					soundEffects.Play ();
 				} 
+				//if dummyLadder, hold real ladder instead
 				else if (holdme.gameObject == dummyLadder) 
 				{
 					theHeld = theLadder;

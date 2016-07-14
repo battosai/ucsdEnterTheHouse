@@ -4,8 +4,8 @@ using System.Collections;
 public class LadderSnap : MonoBehaviour 
 {
 	public int snapID;
-
 	public bool snap;
+
 	bool handsAreFull;
 	GameObject theHeld;
 
@@ -76,14 +76,24 @@ public class LadderSnap : MonoBehaviour
 			case 1:
 				dummyLadder.transform.position = new Vector3 (dummyLadderPos.x, dummyLadderPos.y, theLadderPos.z);
 				break;
+			case 2:
+				dummyLadder.transform.position = new Vector3 (theLadderPos.x, dummyLadderPos.y, dummyLadderPos.z);
+				break;
+			case 3:
+				dummyLadder.transform.position = new Vector3 (theLadderPos.x, dummyLadderPos.y, dummyLadderPos.z);
+				break;
+			case 4:
+				dummyLadder.transform.position = new Vector3 (dummyLadderPos.x, dummyLadderPos.y, theLadderPos.z);
+				break;
 			}
 		}
 	}
 
 	/* SNAP IDs
 	 * 1: x = (7.12, -10degrees), y = (0.05, 90degrees), z = 0degrees
-	 * 2:
-	 * 3:
+	 * 2: x = (-10degrees), y = (0.05, 0degrees), z = (-31.95, 0degrees)
+	 * 3: x = (10degrees), y = (0, 0degrees), z = (-42.5, 0degrees)
+	 * 4: x = (-0.17, 10degrees), y = (0.05, 90degrees), z = 0degrees
 	*/
 	void swapLadders()
 	{
@@ -110,8 +120,25 @@ public class LadderSnap : MonoBehaviour
 																 RigidbodyConstraints.FreezePositionY;
 			break;
 		case 2:
+			dummyLadderPos = new Vector3 (theLadderPos.x, 0.05f, -31.95f);
+			dummyLadderRot = Quaternion.Euler (-10, 0, 0);
+			dummyLadder.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY |
+																 RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY |
+																 RigidbodyConstraints.FreezePositionZ;
 			break;
 		case 3:
+			dummyLadderPos = new Vector3 (theLadderPos.x, 0f, -42.5f);
+			dummyLadderRot = Quaternion.Euler (10, 0, 0);
+			dummyLadder.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY |
+																 RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY |
+																 RigidbodyConstraints.FreezePositionZ;
+			break;
+		case 4:
+			dummyLadderPos = new Vector3 (-0.17f, 0.05f, theLadderPos.z);
+			dummyLadderRot = Quaternion.Euler (10, 90, 0);
+			dummyLadder.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY |
+															 	 RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionX |
+																 RigidbodyConstraints.FreezePositionY;
 			break;
 		}
 
@@ -133,5 +160,23 @@ public class LadderSnap : MonoBehaviour
 		}	
 		theLadderCollider.isTrigger = false;
 		theLadder.GetComponent<Rigidbody> ().isKinematic = false;
+
+		switch (snapID) 
+		{
+		case 1:
+			theLadderRot = Quaternion.Euler(-10, 90, 0);
+			break;
+		case 2:
+			theLadderRot = Quaternion.Euler (-10, 0, 0);
+			break;
+		case 3:
+			theLadderRot = Quaternion.Euler (10, 0, 0);
+			break;
+		case 4:
+			theLadderRot = Quaternion.Euler (10, 90, 0);
+			break;
+		}
+
+		theLadder.transform.rotation = dummyLadderRot;
 	}
 }
