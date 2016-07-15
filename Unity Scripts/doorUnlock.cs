@@ -43,13 +43,8 @@ public class doorUnlock : MonoBehaviour
 			//check if object hit is the door and that player has the key
 			if(hit.transform.gameObject == theDoor && canUnlock)
 			{
-				player.GetComponent<PlayerController>().stereo.Pause();
-				player.GetComponent<PlayerController>().currPage.enabled = false;
-				GameObject.FindWithTag("Controls").GetComponent<Text>().enabled = false;
-				userInputEnabled = false;
+				theDoor.GetComponent<doorUnlock>().endScene ();
 				stereo.PlayOneShot(unlockSound, 1);
-				mainCam.enabled = false;
-				endCam.enabled = true;
 				Invoke("endGame", 6);
 			}
 			//if the player is aiming at the door but does not have the key
@@ -59,7 +54,17 @@ public class doorUnlock : MonoBehaviour
 			}
 		}
 	}
-	
+
+	public void endScene()
+	{
+		player.GetComponent<PlayerController>().stereo.Pause();
+		player.GetComponent<PlayerController>().currPage.enabled = false;
+		GameObject.FindWithTag("Controls").GetComponent<Text>().enabled = false;
+		userInputEnabled = false;
+		mainCam.enabled = false;
+		endCam.enabled = true;
+	}
+
 	public void endGame()
 	{
 		Application.Quit();

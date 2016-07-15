@@ -161,7 +161,8 @@ public class LadderSnap : MonoBehaviour
 		theLadderCollider.isTrigger = false;
 		theLadder.GetComponent<Rigidbody> ().isKinematic = false;
 
-		switch (snapID) 
+		//might not need if we just use that one line below
+		/*switch (snapID) 
 		{
 		case 1:
 			theLadderRot = Quaternion.Euler(-10, 90, 0);
@@ -175,8 +176,9 @@ public class LadderSnap : MonoBehaviour
 		case 4:
 			theLadderRot = Quaternion.Euler (10, 90, 0);
 			break;
-		}
+		}*/
 
+		// = dummyLadderRot or theLadderROt????
 		theLadder.transform.rotation = dummyLadderRot;
 	}
 }
