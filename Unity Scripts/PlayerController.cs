@@ -46,10 +46,6 @@ public class PlayerController : MonoBehaviour
 		clueNum = 1;
 	}
 	
-	void Start()
-	{
-	}
-	
 	void FixedUpdate() //called just before any physics operations; physics code
 	{
 		bool inputEnabled = GameObject.FindWithTag("Door").GetComponent<doorUnlock>().userInputEnabled;

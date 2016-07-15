@@ -8,6 +8,8 @@ public class CameraController_Mouse : MonoBehaviour
 	public float mouseSpeed;
 	public Texture2D crosshairImage;
 	public float xRotation, yRotation;
+
+	float timestamp;
 	
 	void Awake()
 	{
@@ -17,6 +19,8 @@ public class CameraController_Mouse : MonoBehaviour
 	void Start()
 	{
 		offset = transform.position - player.transform.position;
+		timestamp = Time.time;
+		AudioListener.volume = 0.0f;
 	}
 	
 	void FixedUpdate()
@@ -27,7 +31,15 @@ public class CameraController_Mouse : MonoBehaviour
 		yRotation += Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
 		transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
 	}
-	
+
+	void Update()
+	{
+		if (Time.time - timestamp >= 0.6) 
+		{
+			AudioListener.volume = 1.0f;
+		}
+	}
+
 	void LateUpdate() //runs every frame like Update, but guaranteed to run after all updates have been processed (make sure player has moved for each frame)
 	{
 		transform.position = player.transform.position + offset;
