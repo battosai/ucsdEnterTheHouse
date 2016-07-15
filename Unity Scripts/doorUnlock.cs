@@ -43,7 +43,7 @@ public class doorUnlock : MonoBehaviour
 			//check if object hit is the door and that player has the key
 			if(hit.transform.gameObject == theDoor && canUnlock)
 			{
-				theDoor.GetComponent<doorUnlock>().endScene ();
+				endScene ();
 				stereo.PlayOneShot(unlockSound, 1);
 				Invoke("endGame", 6);
 			}
