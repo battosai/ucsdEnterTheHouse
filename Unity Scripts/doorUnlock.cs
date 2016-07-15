@@ -13,6 +13,7 @@ public class doorUnlock : MonoBehaviour
 	Camera endCam;
 	AudioSource stereo;
 	bool canUnlock;
+	bool handsAreFull;
 
 	// Use this for initialization
 	void Awake()
@@ -67,10 +68,18 @@ public class doorUnlock : MonoBehaviour
 	// Update is called once per frame
 	void Update() 
 	{
-		if(player.GetComponent<iPickYouUp>() != null)
-			canUnlock = player.GetComponent<iPickYouUp>().hasKey;
+
+
+		if (player.GetComponent<iPickYouUp> () != null) {
+			handsAreFull = player.GetComponent<iPickYouUp> ().handsAreFull;
+			canUnlock = player.GetComponent<iPickYouUp> ().hasKey;
+		} 
+		else 
+		{
+			handsAreFull = player.GetComponent<broadPickUp> ().handsAreFull;
+		}
 		
-		if(Input.GetKeyDown(KeyCode.Space) && userInputEnabled)
+		if(Input.GetKeyDown(KeyCode.Space) && userInputEnabled && !handsAreFull)
 		{
 			openDoor();
 		}
