@@ -84,6 +84,7 @@ public class broadPickUp : MonoBehaviour
 		if(Physics.Raycast(aim, out hit, 4))
 		{
 			holdme = hit.collider.GetComponent<pickMeUp>();
+			GetComponent<iThrowYou> ().theThrown = null;
 
 			if (holdme.gameObject != null) 
 			{

@@ -22,11 +22,11 @@ public class iThrowYou : MonoBehaviour
 	void Update()
 	{
 		handsAreFull = pickUpScript.handsAreFull;
-		theThrown = pickUpScript.theHeld;
 
 		//if holding an object and Space is pressed, toss it
 		if (handsAreFull && Input.GetKeyDown(KeyCode.Space)) 
 		{
+			theThrown = pickUpScript.theHeld;
 			toss();
 		}
 	}
