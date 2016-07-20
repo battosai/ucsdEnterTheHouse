@@ -15,6 +15,7 @@ public class broadPickUp : MonoBehaviour
 	GameObject firstClue, secondClue, thirdClue;
 	GameObject dummyLadder;
 	GameObject theLadder;
+	GameObject axe;
 
 	AudioSource soundEffects;
 
@@ -30,6 +31,7 @@ public class broadPickUp : MonoBehaviour
 		firstClue = GameObject.FindWithTag("clue1");
 		secondClue = GameObject.FindWithTag("clue2");
 		thirdClue = GameObject.FindWithTag("clue3");
+		axe = GameObject.FindWithTag ("Axe");
 		soundEffects = GameObject.FindWithTag("SoundFX").GetComponent<AudioSource>();
 	}
 
@@ -66,6 +68,12 @@ public class broadPickUp : MonoBehaviour
 	{
 		//turn gravity back on
 		//point to empty object
+		if (theHeld == axe) 
+		{
+			axe.GetComponent<axeSwing> ().holdingAxe = false;
+			axe.GetComponent<axeSwing> ().oneRun = true;
+		}
+
 		handsAreFull = false;
 		theHeld.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		theHeld = null;
@@ -116,12 +124,20 @@ public class broadPickUp : MonoBehaviour
 					soundEffects.Play ();
 				} 
 				//if dummyLadder, hold real ladder instead
-				else if (holdme.gameObject == dummyLadder) 
-				{
+				else if (holdme.gameObject == dummyLadder) {
 					theHeld = theLadder;
 					distance = Vector3.Distance (hit.collider.transform.position, transform.position);
 					holdme.gameObject.GetComponent<Rigidbody> ().useGravity = false;
 					handsAreFull = true;
+				} 
+				else if (holdme.gameObject == axe) 
+				{
+					axe.GetComponent<axeSwing> ().holdingAxe = true;
+					axe.GetComponent<axeSwing> ().oneRun = true;
+					distance = Vector3.Distance (hit.collider.transform.position, transform.position);
+					handsAreFull = true;
+					theHeld = holdme.gameObject;
+					holdme.gameObject.GetComponent<Rigidbody> ().useGravity = false;
 				}
 				//if any object that isn't essential
 				else 

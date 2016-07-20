@@ -4,6 +4,7 @@ using System.Collections;
 public class windowBreak : MonoBehaviour 
 {
 	public int windowID;
+	public bool windowReady;
 
 	int windowHP;
 	int thrownObjectID;
@@ -13,6 +14,7 @@ public class windowBreak : MonoBehaviour
 
 	void Awake()
 	{
+		windowReady = false;
 		windowHP = 2; //depending on how many boards are on the windows...should be 2
 		player = GameObject.FindWithTag ("Player");
 		playerThrowScript = player.GetComponent<iThrowYou> ();
@@ -52,7 +54,6 @@ public class windowBreak : MonoBehaviour
 			} 
 			else if (windowHP == 0) {
 				windowBoard1.GetComponent<Renderer> ().enabled = false;
-				GetComponent<Collider> ().enabled = false;
 			}
 			break;
 		case 2:
@@ -61,7 +62,6 @@ public class windowBreak : MonoBehaviour
 			}
 			else if (windowHP == 0) {
 				windowBoard3.GetComponent<Renderer> ().enabled = false;
-				GetComponent<Collider> ().enabled = false;
 			}
 			break;
 		case 3:
@@ -70,7 +70,6 @@ public class windowBreak : MonoBehaviour
 			}
 			else if (windowHP == 0) {
 				windowBoard5.GetComponent<Renderer> ().enabled = false;
-				GetComponent<Collider> ().enabled = false;
 			}
 			break;
 		case 4:
@@ -79,7 +78,6 @@ public class windowBreak : MonoBehaviour
 			}
 			else if (windowHP == 0) {
 				windowBoard7.GetComponent<Renderer> ().enabled = false;
-				GetComponent<Collider> ().enabled = false;
 			}
 			break;
 		case 5:
@@ -88,9 +86,11 @@ public class windowBreak : MonoBehaviour
 			}
 			else if (windowHP == 0) {
 				windowBoard9.GetComponent<Renderer> ().enabled = false;
-				GetComponent<Collider> ().enabled = false;
 			}
 			break;
 		}
+
+		if (windowHP == 0)
+			windowReady = true;
 	}
 }
