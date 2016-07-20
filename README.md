@@ -21,9 +21,11 @@ Narrow: iPickYouUp, (narrowImpactSounds)
 
 # Unity Assets Used
 * Abandoned Buildings by Aleksey Kozhemyakin 
+* Action RPG Melee Axe by Vibrant Core
 * Alchemy Station by David Stenfors
 * Construction Site Pack by Alex McDonnell
 * Damaged Old Car by VIS Games
+* Decrepit Dungeon LITE by Prodigious Creations
 * Dumpster by Rakshi Games
 * Free Steel Ladder Pack by Surpent
 * Handpainted Keys by RoboCG 
