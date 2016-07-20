@@ -6,10 +6,13 @@ public class windowBreak : MonoBehaviour
 	public int windowID;
 	public bool windowReady;
 
-	int windowHP;
+	public int windowHP;
 	int thrownObjectID;
 	GameObject player;
 	GameObject windowBoard1, windowBoard2, windowBoard3, windowBoard4, windowBoard5, windowBoard6, windowBoard7, windowBoard8, windowBoard9, windowBoard10;
+	GameObject axeBlade;
+	AudioSource FXstereo;
+	AudioClip chopSound;
 	iThrowYou playerThrowScript;
 
 	void Awake()
@@ -28,18 +31,26 @@ public class windowBreak : MonoBehaviour
 		windowBoard8 = GameObject.FindWithTag ("WindowBoard8");
 		windowBoard9 = GameObject.FindWithTag ("WindowBoard9");
 		windowBoard10 = GameObject.FindWithTag ("WindowBoard10");
+		axeBlade = GameObject.FindWithTag ("AxeBlade");
+		FXstereo = GameObject.FindWithTag ("SoundFX").GetComponent<AudioSource> ();
+		chopSound = GameObject.FindWithTag ("Door").GetComponent<doorUnlock> ().chopSound;
 	}
 
 	void Update()
 	{
-		thrownObjectID = playerThrowScript.theThrown.GetComponent<impactSounds>().objectID;
+		if(playerThrowScript.theThrown != null)
+			thrownObjectID = playerThrowScript.theThrown.GetComponent<impactSounds>().objectID;
 	}
 
 	void OnCollisionEnter(Collision other)
 	{
 		//use theThrown from iThrowYou and objectID to identify if it's an appropriate object
-		if (other.collider.gameObject == playerThrowScript.theThrown && thrownObjectID == 3 && windowHP > 0) 
-		{
+		if (other.collider.gameObject == playerThrowScript.theThrown && thrownObjectID == 3 && windowHP > 0) {
+			windowHP--;
+			breakBoard ();
+		} 
+		else if (other.collider.gameObject == axeBlade && windowHP > 0) {
+			FXstereo.PlayOneShot (chopSound, 1);
 			windowHP--;
 			breakBoard ();
 		}

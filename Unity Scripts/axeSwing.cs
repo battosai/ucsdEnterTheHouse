@@ -7,11 +7,13 @@ public class axeSwing : MonoBehaviour {
 
 	GameObject axeBlade;
 	GameObject axeHandle;
+	GameObject theDoor;
 
 	void Awake()
 	{
 		axeBlade = GameObject.FindWithTag ("AxeBlade");
 		axeHandle = GameObject.FindWithTag ("AxeHandle");
+		theDoor = GameObject.FindWithTag ("Door");
 	}
 
 	void Start()
@@ -24,23 +26,11 @@ public class axeSwing : MonoBehaviour {
 
 	void Update()
 	{
-		if (holdingAxe) 
-		{
-			reposition ();
-		} 
-		else 
-		{
-		}
-
 		if (oneRun) 
 		{
 			swapColliders ();
 			oneRun = false;
 		}
-	}
-
-	void reposition()
-	{
 	}
 
 	void swapColliders()
@@ -49,4 +39,5 @@ public class axeSwing : MonoBehaviour {
 		axeHandle.GetComponent<Collider> ().enabled = !axeHandle.GetComponent<Collider> ().enabled;
 		GetComponent<Collider> ().enabled = !GetComponent<Collider> ().enabled;
 	}
+		
 }

@@ -6,9 +6,12 @@ public class doorUnlock : MonoBehaviour
 {	
 	public AudioClip unlockSound;
 	public AudioClip lockedOut;
+	public AudioClip chopSound;
 	public bool userInputEnabled;
+
 	GameObject theDoor;
 	GameObject player;
+	GameObject axeBlade;
 	Camera mainCam;
 	Camera endCam;
 	AudioSource stereo;
@@ -22,6 +25,7 @@ public class doorUnlock : MonoBehaviour
 		endCam = GameObject.FindWithTag("EndCamera").GetComponent<Camera>();
 		theDoor = GameObject.FindWithTag("Door");
 		player = GameObject.FindWithTag("Player");
+		axeBlade = GameObject.FindWithTag ("AxeBlade");
 		endCam.GetComponent<AudioListener>().enabled = false;
 		endCam.enabled = false;
 		stereo = GetComponent<AudioSource>();
@@ -87,6 +91,19 @@ public class doorUnlock : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.Space) && userInputEnabled && !handsAreFull)
 		{
 			openDoor();
+		}
+	}
+
+	void OnCollisionEnter(Collision other)
+	{
+		if (axeBlade == null)
+			return;
+
+		if (other.collider.gameObject == axeBlade) {
+			axeBlade.GetComponent<Collider> ().enabled = false;
+			endScene ();
+			stereo.PlayOneShot(chopSound, 1);
+			Invoke("endGame", 4);
 		}
 	}
 }
