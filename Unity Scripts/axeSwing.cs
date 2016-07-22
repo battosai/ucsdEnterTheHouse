@@ -33,15 +33,15 @@ public class axeSwing : MonoBehaviour {
 		else
 			holdingAxe = false;
 
-		if (oneRun) 
+		if (oneRun != holdingAxe) 
 		{
 			swapColliders ();
-			oneRun = false;
 		}
 	}
 
 	void swapColliders()
 	{
+		oneRun = !oneRun;
 		axeBlade.GetComponent<Collider> ().enabled = !axeBlade.GetComponent<Collider> ().enabled;
 		axeHandle.GetComponent<Collider> ().enabled = !axeHandle.GetComponent<Collider> ().enabled;
 		GetComponent<Collider> ().enabled = !GetComponent<Collider> ().enabled;

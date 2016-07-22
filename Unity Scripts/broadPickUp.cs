@@ -77,12 +77,6 @@ public class broadPickUp : MonoBehaviour
 	{
 		//turn gravity back on
 		//point to empty object
-		if (theHeld == axe) 
-		{
-			axe.GetComponent<axeSwing> ().oneRun = true;
-		}
-
-
 		handsAreFull = false;
 		theHeld.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		theHeld = null;
@@ -138,14 +132,6 @@ public class broadPickUp : MonoBehaviour
 					distance = Vector3.Distance (hit.collider.transform.position, transform.position);
 					theLadder.GetComponent<Rigidbody> ().useGravity = false;
 					handsAreFull = true;
-				} 
-				else if (holdme.gameObject == axe) 
-				{
-					axe.GetComponent<axeSwing> ().oneRun = true;
-					distance = Vector3.Distance (hit.collider.transform.position, transform.position);
-					handsAreFull = true;
-					theHeld = holdme.gameObject;
-					holdme.gameObject.GetComponent<Rigidbody> ().useGravity = false;
 				} 
 				else if (holdme.gameObject == liftBody) 
 				{
