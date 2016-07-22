@@ -5,12 +5,14 @@ public class axeSwing : MonoBehaviour {
 	public bool holdingAxe;
 	public bool oneRun;
 
+	GameObject player;
 	GameObject axeBlade;
 	GameObject axeHandle;
 	GameObject theDoor;
 
 	void Awake()
 	{
+		player = GameObject.FindWithTag ("Player");
 		axeBlade = GameObject.FindWithTag ("AxeBlade");
 		axeHandle = GameObject.FindWithTag ("AxeHandle");
 		theDoor = GameObject.FindWithTag ("Door");
@@ -26,6 +28,11 @@ public class axeSwing : MonoBehaviour {
 
 	void Update()
 	{
+		if (player.GetComponent<broadPickUp> ().theHeld == this.gameObject)
+			holdingAxe = true;
+		else
+			holdingAxe = false;
+
 		if (oneRun) 
 		{
 			swapColliders ();

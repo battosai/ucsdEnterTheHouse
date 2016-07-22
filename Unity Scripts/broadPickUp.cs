@@ -16,6 +16,8 @@ public class broadPickUp : MonoBehaviour
 	GameObject dummyLadder;
 	GameObject theLadder;
 	GameObject axe;
+	GameObject lift;
+	GameObject liftBody;
 
 	AudioSource soundEffects;
 
@@ -32,7 +34,14 @@ public class broadPickUp : MonoBehaviour
 		secondClue = GameObject.FindWithTag("clue2");
 		thirdClue = GameObject.FindWithTag("clue3");
 		axe = GameObject.FindWithTag ("Axe");
+		lift = GameObject.FindWithTag ("Lift");
+		liftBody = GameObject.FindWithTag ("LiftBody");
 		soundEffects = GameObject.FindWithTag("SoundFX").GetComponent<AudioSource>();
+	}
+
+	void Start()
+	{
+		handsAreFull = false;
 	}
 
 	// Update is called once per frame
@@ -70,9 +79,9 @@ public class broadPickUp : MonoBehaviour
 		//point to empty object
 		if (theHeld == axe) 
 		{
-			axe.GetComponent<axeSwing> ().holdingAxe = false;
 			axe.GetComponent<axeSwing> ().oneRun = true;
 		}
+
 
 		handsAreFull = false;
 		theHeld.gameObject.GetComponent<Rigidbody>().useGravity = true;
@@ -127,17 +136,23 @@ public class broadPickUp : MonoBehaviour
 				else if (holdme.gameObject == dummyLadder) {
 					theHeld = theLadder;
 					distance = Vector3.Distance (hit.collider.transform.position, transform.position);
-					holdme.gameObject.GetComponent<Rigidbody> ().useGravity = false;
+					theLadder.GetComponent<Rigidbody> ().useGravity = false;
 					handsAreFull = true;
 				} 
 				else if (holdme.gameObject == axe) 
 				{
-					axe.GetComponent<axeSwing> ().holdingAxe = true;
 					axe.GetComponent<axeSwing> ().oneRun = true;
 					distance = Vector3.Distance (hit.collider.transform.position, transform.position);
 					handsAreFull = true;
 					theHeld = holdme.gameObject;
 					holdme.gameObject.GetComponent<Rigidbody> ().useGravity = false;
+				} 
+				else if (holdme.gameObject == liftBody) 
+				{
+					distance = Vector3.Distance (hit.collider.transform.position, transform.position);
+					handsAreFull = true;
+					theHeld = lift;
+					lift.GetComponent<Rigidbody> ().useGravity = false;
 				}
 				//if any object that isn't essential
 				else 
