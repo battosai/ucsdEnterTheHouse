@@ -71,6 +71,17 @@ public class broadPickUp : MonoBehaviour
 	{
 		//hold object at constant distance 
 		theHeld.transform.position = Vector3.Lerp (theHeld.transform.position, cameraman.transform.position + cameraman.transform.forward * distance, speed * Time.deltaTime);
+
+		Vector3 newPos = new Vector3 (theHeld.transform.position.x, theHeld.transform.position.y, theHeld.transform.position.z);
+
+		if ((theHeld.GetComponent<Rigidbody> ().constraints & RigidbodyConstraints.FreezePositionX) != RigidbodyConstraints.None)
+			newPos.x = 0f;
+		if ((theHeld.GetComponent<Rigidbody> ().constraints & RigidbodyConstraints.FreezePositionY) != RigidbodyConstraints.None)
+			newPos.y = 0f;
+		if ((theHeld.GetComponent<Rigidbody> ().constraints & RigidbodyConstraints.FreezePositionZ) != RigidbodyConstraints.None)
+			newPos.z = 0f;
+
+		theHeld.transform.position = newPos;
 	}
 
 	void drop()
