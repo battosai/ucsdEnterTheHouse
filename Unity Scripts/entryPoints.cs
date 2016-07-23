@@ -5,6 +5,7 @@ public class entryPoints : MonoBehaviour
 {
 	public AudioClip filler;
 
+	bool trapdoorReady;
 	bool[] windowReady;
 	bool userInputEnabled;
 	bool handsAreFull;
@@ -17,6 +18,8 @@ public class entryPoints : MonoBehaviour
 	GameObject ladderZone1, ladderZone2, ladderZone3, ladderZone4;
 	GameObject theDoor;
 	GameObject dummyLadder;
+	GameObject trapDoor;
+	GameObject trapdoorDoor;
 
 	void Awake()
 	{
@@ -35,11 +38,14 @@ public class entryPoints : MonoBehaviour
 		windowZone3 = GameObject.FindWithTag ("WindowZone3");
 		windowZone4 = GameObject.FindWithTag ("WindowZone4");
 		windowZone5 = GameObject.FindWithTag ("WindowZone5");
+		trapDoor = GameObject.FindWithTag ("Trapdoor");
+		trapdoorDoor = GameObject.FindWithTag ("TrapdoorDoor");
 		fxStereo = GameObject.FindWithTag ("SoundFX").GetComponent<AudioSource>();
 	}
 
 	void Update() 
 	{
+		trapdoorReady = trapDoor.GetComponent<trapdoorBlocked> ().trapdoorReady;
 		windowReady [1] = windowZone1.GetComponent<windowBreak> ().windowReady;
 		windowReady [2] = windowZone2.GetComponent<windowBreak> ().windowReady;
 		windowReady [3] = windowZone3.GetComponent<windowBreak> ().windowReady;
@@ -76,13 +82,20 @@ public class entryPoints : MonoBehaviour
 				doorUnlockScript.Invoke ("endGame", 6);
 			}
 			//windows
-			else if (hit.transform.gameObject.GetComponent<windowBreak> () != null && windowReady[0]) {
-				if (testWindows (hit.transform.gameObject.GetComponent<windowBreak>()) ) {
+			else if (hit.transform.gameObject.GetComponent<windowBreak> () != null && windowReady [0]) {
+				if (testWindows (hit.transform.gameObject.GetComponent<windowBreak> ())) {
 					doorUnlockScript.endScene ();
 					fxStereo.PlayOneShot (filler, 1);
 					doorUnlockScript.Invoke ("endGame", 6);
 				}
 			}
+			//trapdoor
+			else if (hit.transform.gameObject == trapdoorDoor && trapdoorReady) 
+			{
+				doorUnlockScript.endScene ();
+				fxStereo.PlayOneShot (filler, 1);
+				doorUnlockScript.Invoke ("endGame", 6);
+			}	
 		}
 	}
 

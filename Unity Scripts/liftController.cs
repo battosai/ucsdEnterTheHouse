@@ -35,7 +35,7 @@ public class liftController : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.GetComponent<pickMeUp> () != null && theLifted == null) 
+		if ((other.gameObject.GetComponent<pickMeUp> () != null || other.gameObject.GetComponent<liftMeUp>() != null) && theLifted == null) 
 		{
 			liftingObject = true;
 			theLifted = other.gameObject;
@@ -60,13 +60,17 @@ public class liftController : MonoBehaviour
 		{
 			yRotation += Input.GetAxis ("Mouse X") * mouseSpeed * Time.deltaTime;
 			transform.rotation = Quaternion.Euler (-90f, yRotation, 0);
-		}
 
-		if (lockObject) 
-		{
-			yRotation2 += Input.GetAxis ("Mouse X") * mouseSpeed * Time.deltaTime;
-			theLifted.transform.position = objectZone.transform.position;
-			theLifted.transform.rotation = Quaternion.Euler (0, yRotation2, 0);
+			//rotate object being lifted as well
+			if (lockObject) 
+			{
+				yRotation2 += Input.GetAxis ("Mouse X") * mouseSpeed * Time.deltaTime;
+				theLifted.transform.position = objectZone.transform.position;
+				theLifted.transform.rotation = Quaternion.Euler (0, yRotation2, 0);
+
+				if (theLifted.GetComponent<liftMeUp> () != null)
+					theLifted.transform.rotation = Quaternion.Euler (-90, yRotation2 - 360, 0);
+			}
 		}
 	}
 
