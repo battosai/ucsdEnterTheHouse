@@ -29,6 +29,7 @@ Narrow: iPickYouUp, (narrowImpactSounds)
 * Dumpster by Rakshi Games
 * Free Steel Ladder Pack by Surpent
 * Handpainted Keys by RoboCG 
+* Industrial Objects Pack by Arkham Interactive
 * Junk by UCSD
 * Medieval Gold by Mister Necturus
 * PBS Materials Variety Pack by Integrity Software & Games 
