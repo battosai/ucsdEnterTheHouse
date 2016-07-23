@@ -6,19 +6,22 @@ public class liftController : MonoBehaviour
 	public GameObject theLifted;
 	public bool usingLift;
 	public bool liftingObject;
+	public bool lockObject;
 
 	bool restrained;
-	float xRotation, yRotation;
+	float yRotation, yRotation2;
 	float mouseSpeed;
 	GameObject player;
 	GameObject mainCam;
 	GameObject liftBody;
+	GameObject objectZone;
 
 	void Awake()
 	{
 		mainCam = GameObject.FindWithTag ("MainCamera");
 		player = GameObject.FindWithTag ("Player");
 		liftBody = GameObject.FindWithTag ("LiftBody");
+		objectZone = GameObject.FindWithTag ("ObjectZone");
 	}
 
 	void Start()
@@ -27,11 +30,12 @@ public class liftController : MonoBehaviour
 		restrained = false;
 		usingLift = false;
 		liftingObject = false;
+		lockObject = false;
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.GetComponent<pickMeUp> () != null) 
+		if (other.gameObject.GetComponent<pickMeUp> () != null && theLifted == null) 
 		{
 			liftingObject = true;
 			theLifted = other.gameObject;
@@ -41,17 +45,28 @@ public class liftController : MonoBehaviour
 	void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject == theLifted)
+		{
 			liftingObject = false;
+			lockObject = false;
+			theLifted = null;
+		}
 	}
-
-
-	//lift should rotate with player along the world Y-Axis
+		
 	void FixedUpdate()
 	{
+
+		//lift should rotate with player along the world y-axis
 		if (usingLift) 
 		{
 			yRotation += Input.GetAxis ("Mouse X") * mouseSpeed * Time.deltaTime;
 			transform.rotation = Quaternion.Euler (-90f, yRotation, 0);
+		}
+
+		if (lockObject) 
+		{
+			yRotation2 += Input.GetAxis ("Mouse X") * mouseSpeed * Time.deltaTime;
+			theLifted.transform.position = objectZone.transform.position;
+			theLifted.transform.rotation = Quaternion.Euler (0, yRotation2, 0);
 		}
 	}
 
@@ -66,11 +81,17 @@ public class liftController : MonoBehaviour
 		}
 
 		if (usingLift) 
-		{
 			GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezePositionY;
-			
-		}
-			else
+		else
 			GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+
+		//as long as player isn't walking backwards, lift will always hold object
+		if (liftingObject) 
+		{
+			lockObject = true;
+
+			if(Input.GetKey(KeyCode.S))
+				lockObject = false;
+		}
 	}
 }
