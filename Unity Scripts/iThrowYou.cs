@@ -9,6 +9,8 @@ public class iThrowYou : MonoBehaviour
 	public AudioClip woodThump;
 	public AudioClip mattressThump;
 	public AudioClip plasticThump;
+	public AudioClip metalClang;
+	public AudioClip brick;
 
 	GameObject axe;
 	broadPickUp pickUpScript;

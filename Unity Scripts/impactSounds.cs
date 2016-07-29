@@ -10,7 +10,7 @@ public class impactSounds : MonoBehaviour
 	 * 4 - Reflector
 	 * 5 - Mattress
 	 * 6 - Tire (same as orange barrel?)
-	 * 7 - Airduct Vent (same as cinderblock?)
+	 * 7 - Ladder
      */
 	public int objectID;
 
@@ -20,6 +20,8 @@ public class impactSounds : MonoBehaviour
 	AudioClip hollowThump;
 	AudioClip mattressThump;
 	AudioClip plasticThump;
+	AudioClip metalClang;
+	AudioClip brick;
 
 	void Awake()
 	{
@@ -29,10 +31,15 @@ public class impactSounds : MonoBehaviour
 		woodThump = player.GetComponent<iThrowYou>().woodThump;
 		mattressThump = player.GetComponent<iThrowYou>().mattressThump;
 		plasticThump = player.GetComponent<iThrowYou>().plasticThump;
+		metalClang = player.GetComponent<iThrowYou> ().metalClang;
+		brick = player.GetComponent<iThrowYou> ().brick;
 	}
 
 	void OnCollisionEnter(Collision other)
 	{
+		if (other.gameObject == player)
+			return;
+		
 		switch (objectID) 
 		{
 		case 1:
@@ -42,6 +49,7 @@ public class impactSounds : MonoBehaviour
 			impactStereo.PlayOneShot (hollowThump, 1);
 			break;
 		case 3:
+			impactStereo.PlayOneShot (brick, 1);
 			break;
 		case 4:
 			impactStereo.PlayOneShot (plasticThump, 1);
@@ -53,6 +61,7 @@ public class impactSounds : MonoBehaviour
 			impactStereo.PlayOneShot (hollowThump, 1);
 			break;
 		case 7:
+			impactStereo.PlayOneShot (metalClang, 1);
 			break;
 		}
 	}

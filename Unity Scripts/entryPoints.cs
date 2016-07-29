@@ -3,7 +3,9 @@ using System.Collections;
 
 public class entryPoints : MonoBehaviour 
 {
-	public AudioClip filler;
+	public AudioClip basementDoorSound;
+	public AudioClip windowOpenSound;
+	public AudioClip metalFootsteps;
 
 	bool trapdoorReady;
 	bool[] windowReady;
@@ -78,23 +80,23 @@ public class entryPoints : MonoBehaviour
 			//ladder
 			if (hit.transform.gameObject == dummyLadder && ladderIsReady) {
 				doorUnlockScript.endScene ();
-				fxStereo.PlayOneShot (filler, 1);
-				doorUnlockScript.Invoke ("endGame", 6);
+				fxStereo.PlayOneShot (metalFootsteps, 1);
+				doorUnlockScript.Invoke ("endGame", 4);
 			}
 			//windows
 			else if (hit.transform.gameObject.GetComponent<windowBreak> () != null && windowReady [0]) {
 				if (testWindows (hit.transform.gameObject.GetComponent<windowBreak> ())) {
 					doorUnlockScript.endScene ();
-					fxStereo.PlayOneShot (filler, 1);
-					doorUnlockScript.Invoke ("endGame", 6);
+					fxStereo.PlayOneShot (windowOpenSound, 1);
+					doorUnlockScript.Invoke ("endGame", 4);
 				}
 			}
 			//trapdoor
 			else if (hit.transform.gameObject == trapdoorDoor && trapdoorReady) 
 			{
 				doorUnlockScript.endScene ();
-				fxStereo.PlayOneShot (filler, 1);
-				doorUnlockScript.Invoke ("endGame", 6);
+				fxStereo.PlayOneShot (basementDoorSound, 1);
+				doorUnlockScript.Invoke ("endGame", 3);
 			}	
 		}
 	}
