@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class impactSounds : MonoBehaviour 
+public class narrowSounds : MonoBehaviour 
 {
 	/*
 	 * 1 - Palettes
@@ -27,19 +27,19 @@ public class impactSounds : MonoBehaviour
 	{
 		player = GameObject.FindWithTag("Player");
 		impactStereo = GameObject.FindWithTag("SoundFX").GetComponent<AudioSource>();
-		hollowThump = player.GetComponent<iThrowYou>().hollowThump;
-		woodThump = player.GetComponent<iThrowYou>().woodThump;
-		mattressThump = player.GetComponent<iThrowYou>().mattressThump;
-		plasticThump = player.GetComponent<iThrowYou>().plasticThump;
-		metalClang = player.GetComponent<iThrowYou> ().metalClang;
-		brick = player.GetComponent<iThrowYou> ().brick;
+		hollowThump = player.GetComponent<iPickYouUp>().hollowThump;
+		woodThump = player.GetComponent<iPickYouUp>().woodThump;
+		mattressThump = player.GetComponent<iPickYouUp>().mattressThump;
+		plasticThump = player.GetComponent<iPickYouUp>().plasticThump;
+		metalClang = player.GetComponent<iPickYouUp> ().metalClang;
+		brick = player.GetComponent<iPickYouUp> ().brick;
 	}
 
 	void OnCollisionEnter(Collision other)
 	{
 		if (other.gameObject == player)
 			return;
-		
+
 		switch (objectID) 
 		{
 		case 1:

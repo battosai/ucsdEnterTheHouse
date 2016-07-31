@@ -9,6 +9,12 @@ public class iPickYouUp : MonoBehaviour
 	public bool handsAreFull;
 	public AudioClip paperPickUp;
 	public AudioClip keyPickUp;
+	public AudioClip hollowThump;
+	public AudioClip woodThump;
+	public AudioClip mattressThump;
+	public AudioClip plasticThump;
+	public AudioClip metalClang;
+	public AudioClip brick;
 	public GameObject theHeld;
 	
 	GameObject cameraman;
