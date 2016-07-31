@@ -13,11 +13,11 @@ I created a simple test module using SNAP that gives a visual for the RAT and AU
 * AUT: http://www.creativehuddle.co.uk/the-alternative-uses-test
 
 #Scenario Scripts
-Both: PlayerController, CameraController_Mouse, pickMeUp, doorUnlock
+Both: PlayerController, CameraController_Mouse, pickMeUp, doorUnlock, trackPlayer
 
-Broad: (entryPoints), broadPickup, iThrowYou, impactSounds
+Broad: entryPoints, broadPickup, iThrowYou, impactSounds, axeSwing, liftController, liftMeUp, trapdoorBlocked, windowBreak, LadderSnap
 
-Narrow: iPickYouUp, (narrowImpactSounds)
+Narrow: iPickYouUp, narrowSounds
 
 # Unity Assets Used
 * Abandoned Buildings by Aleksey Kozhemyakin 
