@@ -5,12 +5,17 @@ This experiment was to test if a subject's creativity could be affected by a gam
   
 Speculation of whether or not the narrow scenario "limits" or "less effectively boosts" will be looked at after data has been collected before, after, and during the game experiment.
 
-# SNAP: Simulation and Neuroscience Application Platform
+#SNAP: Simulation and Neuroscience Application Platform
 Link to repository: https://github.com/sccn/SNAP
 
 I created a simple test module using SNAP that gives a visual for the RAT and AUT (RAUT) tests that are used in this experiment. Here are two links for information about the Remote Associates Test (RAT) and the Alternative Uses Test (AUT) respectively.
 * RAT: http://www.creativehuddle.co.uk/the-remote-associates-test
 * AUT: http://www.creativehuddle.co.uk/the-alternative-uses-test
+* 
+#LSL: Lab Streaming Layer
+Link to repository: https://github.com/sccn/labstreaminglayer
+
+Using the LSL library, we were able to achieve real-time sensor data streaming between Unity 3D and the Emotiv EEG headset that participants wore during the experiment.
 
 #Scenario Scripts
 Both: PlayerController, CameraController_Mouse, pickMeUp, doorUnlock, trackPlayer
