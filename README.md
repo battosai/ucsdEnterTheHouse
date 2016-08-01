@@ -11,7 +11,7 @@ Link to repository: https://github.com/sccn/SNAP
 I created a simple test module using SNAP that gives a visual for the RAT and AUT (RAUT) tests that are used in this experiment. Here are two links for information about the Remote Associates Test (RAT) and the Alternative Uses Test (AUT) respectively.
 * RAT: http://www.creativehuddle.co.uk/the-remote-associates-test
 * AUT: http://www.creativehuddle.co.uk/the-alternative-uses-test
-* 
+ 
 #LSL: Lab Streaming Layer
 Link to repository: https://github.com/sccn/labstreaminglayer
 
