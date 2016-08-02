@@ -37,9 +37,11 @@ public class trackPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		//broad scenario check
-		outl.push_sample(strings);
-		if (scenario == 0)
+		//narrow
+		if(scenario == 1)
+			outl.push_sample(strings);
+		//broad
+		else if (scenario == 0)
 			broadCheck ();
 
 		//System.IO.File.WriteAllText("C:\\Users\\Brian\\Desktop\\lsltest.txt", "im running");
