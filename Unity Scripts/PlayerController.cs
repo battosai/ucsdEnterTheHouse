@@ -16,20 +16,23 @@ public class PlayerController : MonoBehaviour
 	
 	GameObject controls;
 	GameObject pageNum;
+	GameObject theLift;
 	
 	bool moveFwd;
 	bool moveBwd;
 	bool moveLeft;
 	bool moveRight;
 	bool footstepsOn;
-	
+
+	string closedMenuLiftText = "While using the lift: Walk forward or sideways to carry the object with you. Walk backwards to drop the object.";
 	string closedMenuText = "Press [Tab] for Menu";
 	string openedMenuText = "";
 	
 	void Awake()
 	{
 		stereo = GetComponent<AudioSource>();
-		
+
+		theLift = GameObject.FindWithTag ("Lift");
 		controls = GameObject.FindWithTag("Controls");
 		controls.GetComponent<Text>().text = openedMenuText;
 		pageNum = GameObject.FindWithTag("PageNum");
@@ -137,6 +140,9 @@ public class PlayerController : MonoBehaviour
 				pageNum.GetComponent<Text>().text = "";
 				currPage.texture = controlPage;
 				controls.GetComponent<Text>().text = closedMenuText;
+
+				if (theLift != null && theLift.GetComponent<liftController> ().liftingObject)
+					controls.GetComponent<Text> ().text = closedMenuLiftText;
 			}
 		}
 	}
