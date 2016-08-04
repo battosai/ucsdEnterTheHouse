@@ -5,7 +5,7 @@ This experiment was to test if a subject's creativity could be affected by a gam
   
 Speculation of whether or not the narrow scenario "limits" or "less effectively boosts" will be looked at after data has been collected before, after, and during the game experiment.
 
-**TO RUN:** To run these games, you will need to have Unity installed. In the "Data Files" directory of this repository, there are two zip files that correspond to the two scenarios. Note that these are made for 64-bit machines. Unzip the files wherever you'd like and run the executable inside. This should work as long as the data folder is in the same directory as the executable if you need to move them around.
+**TO RUN:** In the "Data Files" directory of this repository, there are two zip files that correspond to the two scenarios. Note that these are made for 64-bit machines. Unzip the files wherever you'd like and run the executable inside. This should work as long as the data folder is in the same directory as the executable if you need to move them around.
 
 #SNAP: Simulation and Neuroscience Application Platform
 Link to repository: https://github.com/sccn/SNAP
