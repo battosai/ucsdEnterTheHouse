@@ -50,7 +50,6 @@ public class windowBreak : MonoBehaviour
 			breakBoard ();
 		} 
 		else if (other.collider.gameObject == axeBlade && windowHP > 0) {
-			FXstereo.PlayOneShot (chopSound, 1);
 			windowHP--;
 			breakBoard ();
 		}

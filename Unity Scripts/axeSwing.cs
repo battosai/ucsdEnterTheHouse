@@ -9,6 +9,8 @@ public class axeSwing : MonoBehaviour {
 	GameObject axeBlade;
 	GameObject axeHandle;
 	GameObject theDoor;
+	public float mouseSpeed;
+	float yRotation; 
 
 	void Awake()
 	{
@@ -16,6 +18,7 @@ public class axeSwing : MonoBehaviour {
 		axeBlade = GameObject.FindWithTag ("AxeBlade");
 		axeHandle = GameObject.FindWithTag ("AxeHandle");
 		theDoor = GameObject.FindWithTag ("Door");
+		mouseSpeed = GameObject.FindWithTag("MainCamera").GetComponent<CameraController_Mouse> ().mouseSpeed;
 	}
 
 	void Start()
@@ -24,6 +27,15 @@ public class axeSwing : MonoBehaviour {
 		holdingAxe = false;
 		axeBlade.GetComponent<Collider> ().enabled = false;
 		axeHandle.GetComponent<Collider> ().enabled = false;
+	}
+
+	void FixedUpdate()
+	{
+		if (holdingAxe) 
+		{
+			yRotation += Input.GetAxis ("Mouse X") * mouseSpeed * Time.deltaTime;
+			transform.rotation = Quaternion.Euler (90f, yRotation, 0f);
+		}
 	}
 
 	void Update()
