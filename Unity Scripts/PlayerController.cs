@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 	bool moveRight;
 	bool footstepsOn;
 
-	string closedMenuLiftText = "While using the lift: Walk forward or sideways to carry the object with you. Walk backwards to drop the object.";
+	string closedMenuLiftText = "While using the lift: \nWalk forward or sideways to carry the object with you. \nWalk backwards to drop the object.";
 	string closedMenuText = "Press [Tab] for Menu";
 	string openedMenuText = "";
 	
