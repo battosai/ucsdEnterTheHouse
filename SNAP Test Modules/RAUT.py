@@ -31,14 +31,20 @@ class Main(DirectObject.DirectObject, LatentModule):
         self.autGroup2a = ["BUTTON"]
         self.autGroup2b = ["NEWSPAPER"]
 
-        #self.accept('1', self.test1())
-        #self.accept('2', self.test2())
+
 
     #ENTER NUMBER OF DAY FOR PROPER TESTS
     def run(self):
-        while True:
-            self.write('Enter 1 or 2', 0.5)
 
+        intro_string = self.write('Session 1: Press "1" \n Session 2: Press "2"',0)
+        user_input = self.waitfor_multiple(['1','2'])
+
+        if user_input[0] == '1':
+            intro_string.destroy()
+            self.test1()
+        elif user_input[0] == '2':
+            intro_string.destroy()
+            self.test2()
 
 
     #DAY 1 TESTS
@@ -83,6 +89,7 @@ class Main(DirectObject.DirectObject, LatentModule):
         self.marker(0)
 
         # AUT2a
+
         self.write('In this test, you will be given a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
         self.write('You will be given %d seconds for each object.\nPress the space bar when you are ready to begin' % self.autWait, 'space')
         for i in range(self.autRounds):
@@ -114,4 +121,3 @@ class Main(DirectObject.DirectObject, LatentModule):
             self.sleep(2)
 
         self.write('You have finished the experiment. Thank you.', 5)
-
