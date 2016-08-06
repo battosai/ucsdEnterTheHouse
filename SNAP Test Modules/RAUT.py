@@ -24,7 +24,7 @@ class Main(DirectObject.DirectObject, LatentModule):
                           "HOUND PRESSURE SHOT", "SLEEPING BEAN TRASH", "LIGHT BIRTHDAY STICK", "SHINE BEAM STRUCK", "WATER MINE SHAKER",
                           "BASKET EIGHT SNOW", "RIGHT CAT CARBON", "NUCLEAR FEUD ALBUM", "CROSS RAIN TIE", "FRENCH CAR SHOE"]
 
-        self.autWait = 30                   # this will be the wait time for each object in the AUT
+        self.autWait = 60                   # this will be the wait time for each object in the AUT
         self.autRounds = 1                  # number of objects to be presented (number of elements in autGroup)
         self.autGroup1a = ["BRICK"]
         self.autGroup1b = ["PAPERCLIP"]
@@ -53,7 +53,8 @@ class Main(DirectObject.DirectObject, LatentModule):
 
         # AUT1a
         self.write('In this test, you will be given a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
-        self.write('You will be given %d seconds for each object.\nPress the space bar when you are ready to begin' % self.autWait, 'space')
+        self.write('Say your answers aloud as the audio of this session will be recorded.\nYou will be given %d seconds.' % self.autWait,'space')
+        self.write('Notify us when you have completed the first portion.\nPress the space bar when you are ready to begin.', 'space')
         for i in range(self.autRounds):
             self.marker(10 + i)
             self.write(self.autGroup1a[i], self.autWait, scale=0.5)
@@ -66,7 +67,7 @@ class Main(DirectObject.DirectObject, LatentModule):
         # RAT1
         self.write('In this test, you will be shown a trio of words.\nYour task is to find the fourth word that the trio share.\nPress the space bar to continue.', 'space')
         self.write('For example, if you were shown CREAM SKATE CUBE...\nYou would want to answer with ICE.', 'space')
-        self.write('You will be given %d seconds for each trio.\nIf you can not come up with the answer in time, move on.' % self.ratWait, 'space')
+        self.write('Say your answers aloud as the audio of this session will be recorded.\nYou will be given %d seconds for each trio.\nIf you can not come up with the answer in time, move on.' % self.ratWait, 'space')
         self.write('If you figure out the answer early, wait until the next trio is shown.', 'space')
         self.write('Press the space bar when you are ready to begin.', 'space')
         for i in range(self.ratRounds):
@@ -75,36 +76,36 @@ class Main(DirectObject.DirectObject, LatentModule):
             self.sleep(2)
 
         # AUT1b
-        self.write('In the next test, you will be told/shown a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
-        self.write('You will be given %d seconds for each object.\nPress the space bar when you are ready to begin' % self.autWait, 'space')
+        self.write('In the next test, you will be told a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
+        self.write('You will be given %d seconds.\nPress the space bar when you are ready to begin' % self.autWait, 'space')
         for i in range(self.autRounds):
             self.marker(10 + i)
             self.write(self.autGroup1b[i], self.autWait, scale=0.5)
             self.sleep(2)
 
-        self.write('You have finished the experiment. Thank you.', 5)
+        self.write('Please notify us that you have finished the experiment. Thank you.', 5)
 
     # DAY 2 TESTS
     def test2(self):
         self.marker(0)
 
         # AUT2a
-
         self.write('In this test, you will be given a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
-        self.write('You will be given %d seconds for each object.\nPress the space bar when you are ready to begin' % self.autWait, 'space')
+        self.write('Say your answers aloud as the audio of this session will be recorded.\nYou will be given %d seconds.' % self.autWait,'space')
+        self.write('Notify us when you have completed the first portion.\nPress the space bar when you are ready to begin.', 'space')
         for i in range(self.autRounds):
             self.marker(10 + i)
             self.write(self.autGroup2a[i], self.autWait, scale=0.5)
             self.sleep(2)
 
-        # WAIT FOR GAME TO BE FINISHED
+        #WAIT FOR GAME TO BE FINISHED
         self.write('You have completed the first portion.\nYou will now go through the experiment game.\nPress space bar once you have finished the game.', 'space')
         self.write('If you are finished with the game,\npress space bar to continue to the second portion of testing.', 'space')
 
         # RAT2
         self.write('In this test, you will be shown a trio of words.\nYour task is to find the fourth word that the trio share.\nPress the space bar to continue.', 'space')
         self.write('For example, if you were shown CREAM SKATE CUBE...\nYou would want to answer with ICE.', 'space')
-        self.write('You will be given %d seconds for each trio.\nIf you can not come up with the answer in time, move on.' % self.ratWait, 'space')
+        self.write('Say your answers aloud as the audio of this session will be recorded.\nYou will be given %d seconds for each trio.\nIf you can not come up with the answer in time, move on.' % self.ratWait, 'space')
         self.write('If you figure out the answer early, wait until the next trio is shown.', 'space')
         self.write('Press the space bar when you are ready to begin.', 'space')
         for i in range(self.ratRounds):
@@ -112,12 +113,12 @@ class Main(DirectObject.DirectObject, LatentModule):
             self.write(self.ratGroup2[i], self.ratWait, scale=0.2)
             self.sleep(2)
 
-        # RAT2
-        self.write('In the next test, you will be told/shown a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
-        self.write('You will be given %d seconds for each object.\nPress the space bar when you are ready to begin' % self.autWait, 'space')
+        # AUT1b
+        self.write('In the next test, you will be told a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
+        self.write('You will be given %d seconds.\nPress the space bar when you are ready to begin' % self.autWait, 'space')
         for i in range(self.autRounds):
             self.marker(10 + i)
             self.write(self.autGroup2b[i], self.autWait, scale=0.5)
             self.sleep(2)
 
-        self.write('You have finished the experiment. Thank you.', 5)
+        self.write('Please notify us that you have finished the experiment. Thank you.', 5)
