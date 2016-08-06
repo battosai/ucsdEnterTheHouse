@@ -13,12 +13,14 @@ public class iThrowYou : MonoBehaviour
 	public AudioClip brick;
 
 	GameObject axe;
+	GameObject player;
 	broadPickUp pickUpScript;
 	bool handsAreFull;
 
 	void Awake()
 	{
 		pickUpScript = GetComponent<broadPickUp>();
+		player = GameObject.FindWithTag ("Player");
 		axe = GameObject.FindWithTag ("Axe");
 	}
 
@@ -36,14 +38,15 @@ public class iThrowYou : MonoBehaviour
 
 	void toss()
 	{
-		if (theThrown == axe)
-		{
-			axe.GetComponent<axeSwing> ().oneRun = true;
-		}
-
 		//apply force, let iPickYouUp know it's not being held
 		pickUpScript.handsAreFull = false;
 		pickUpScript.theHeld.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		theThrown.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse); 
+
+		if (theThrown == axe)
+		{
+			axe.GetComponent<axeSwing> ().oneRun = true;
+			player.GetComponent<broadPickUp>().theHeld = null;
+		}
 	}
 }
