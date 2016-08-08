@@ -55,7 +55,7 @@ class Main(DirectObject.DirectObject, LatentModule):
 
         # AUT1a
         self.marker('AUT1')
-        self.write('In this test, you will be given a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
+        self.write('In this test, you will be given a random object.\nYour task is to come up with as many novel uses for the object as you can.\nPress the space bar to continue.', 'space')
         self.write('Say your answers aloud as the audio of this session will be recorded.\nYou will be given %d seconds.' % self.autWait,'space')
         self.write('Notify us when you have completed the first portion.\nPress the space bar when you are ready to begin.', 'space')
         for i in range(self.autRounds):
@@ -82,7 +82,7 @@ class Main(DirectObject.DirectObject, LatentModule):
 
         # AUT1b
         self.marker('AUT2')
-        self.write('In the next test, you will be told a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
+        self.write('In the next test, you will be told a random object.\nYour task is to come up with as many novel uses for the object as you can.\nPress the space bar to continue.', 'space')
         self.write('You will be given %d seconds.\nPress the space bar when you are ready to begin' % self.autWait, 'space')
         for i in range(self.autRounds):
             self.marker(10 + i)
@@ -103,7 +103,7 @@ class Main(DirectObject.DirectObject, LatentModule):
 
         # AUT2a
         self.marker('AUT1')
-        self.write('In this test, you will be given a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
+        self.write('In this test, you will be given a random object.\nYour task is to come up with as many novel uses for the object as you can.\nPress the space bar to continue.', 'space')
         self.write('Say your answers aloud as the audio of this session will be recorded.\nYou will be given %d seconds.' % self.autWait,'space')
         self.write('Notify us when you have completed the first portion.\nPress the space bar when you are ready to begin.', 'space')
         for i in range(self.autRounds):
@@ -130,7 +130,7 @@ class Main(DirectObject.DirectObject, LatentModule):
 
         # AUT1b
         self.marker('AUT2')
-        self.write('In the next test, you will be told a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
+        self.write('In the next test, you will be told a random object.\nYour task is to come up with as many novel uses for the object as you can.\nPress the space bar to continue.', 'space')
         self.write('You will be given %d seconds.\nPress the space bar when you are ready to begin' % self.autWait, 'space')
         for i in range(self.autRounds):
             self.marker(10 + i)
