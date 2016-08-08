@@ -49,9 +49,12 @@ class Main(DirectObject.DirectObject, LatentModule):
 
     #DAY 1 TESTS
     def test1(self):
-        self.marker(0)
+        self.marker('Pre')
+        self.write('Please relax and wait for the headset to adjust.\nThe process should take about 2-minutes.', 10)
+        self.sleep(110)
 
         # AUT1a
+        self.marker('AUT1')
         self.write('In this test, you will be given a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
         self.write('Say your answers aloud as the audio of this session will be recorded.\nYou will be given %d seconds.' % self.autWait,'space')
         self.write('Notify us when you have completed the first portion.\nPress the space bar when you are ready to begin.', 'space')
@@ -61,10 +64,12 @@ class Main(DirectObject.DirectObject, LatentModule):
             self.sleep(2)
 
         #WAIT FOR GAME TO BE FINISHED
+        self.marker('GAME')
         self.write('You have completed the first portion.\nYou will now go through the experiment game.\nPress space bar once you have finished the game.', 'space')
         self.write('If you are finished with the game,\npress space bar to continue to the second portion of testing.', 'space')
 
         # RAT1
+        self.marker('RAT')
         self.write('In this test, you will be shown a trio of words.\nYour task is to find the fourth word that the trio share.\nPress the space bar to continue.', 'space')
         self.write('For example, if you were shown CREAM SKATE CUBE...\nYou would want to answer with ICE.', 'space')
         self.write('Say your answers aloud as the audio of this session will be recorded.\nYou will be given %d seconds for each trio.\nIf you can not come up with the answer in time, move on.' % self.ratWait, 'space')
@@ -76,6 +81,7 @@ class Main(DirectObject.DirectObject, LatentModule):
             self.sleep(2)
 
         # AUT1b
+        self.marker('AUT2')
         self.write('In the next test, you will be told a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
         self.write('You will be given %d seconds.\nPress the space bar when you are ready to begin' % self.autWait, 'space')
         for i in range(self.autRounds):
@@ -83,13 +89,20 @@ class Main(DirectObject.DirectObject, LatentModule):
             self.write(self.autGroup1b[i], self.autWait, scale=0.5)
             self.sleep(2)
 
+        self.marker('Post')
+        self.write('Please relax while the headset finishes collecting data.\nThe process should take about 2-minutes.', 10)
+        self.sleep(110)
+
         self.write('Please notify us that you have finished the experiment. Thank you.', 5)
 
     # DAY 2 TESTS
     def test2(self):
-        self.marker(0)
+        self.marker('Pre')
+        self.write('Please relax and wait for the headset to adjust.\nThe process should take about 2-minutes.', 10)
+        self.sleep(110)
 
         # AUT2a
+        self.marker('AUT1')
         self.write('In this test, you will be given a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
         self.write('Say your answers aloud as the audio of this session will be recorded.\nYou will be given %d seconds.' % self.autWait,'space')
         self.write('Notify us when you have completed the first portion.\nPress the space bar when you are ready to begin.', 'space')
@@ -99,10 +112,12 @@ class Main(DirectObject.DirectObject, LatentModule):
             self.sleep(2)
 
         #WAIT FOR GAME TO BE FINISHED
+        self.marker('GAME')
         self.write('You have completed the first portion.\nYou will now go through the experiment game.\nPress space bar once you have finished the game.', 'space')
         self.write('If you are finished with the game,\npress space bar to continue to the second portion of testing.', 'space')
 
         # RAT2
+        self.marker('RAT')
         self.write('In this test, you will be shown a trio of words.\nYour task is to find the fourth word that the trio share.\nPress the space bar to continue.', 'space')
         self.write('For example, if you were shown CREAM SKATE CUBE...\nYou would want to answer with ICE.', 'space')
         self.write('Say your answers aloud as the audio of this session will be recorded.\nYou will be given %d seconds for each trio.\nIf you can not come up with the answer in time, move on.' % self.ratWait, 'space')
@@ -114,11 +129,16 @@ class Main(DirectObject.DirectObject, LatentModule):
             self.sleep(2)
 
         # AUT1b
+        self.marker('AUT2')
         self.write('In the next test, you will be told a random object.\nYour task is to come up with as many uses for the object as you can.\nPress the space bar to continue.', 'space')
         self.write('You will be given %d seconds.\nPress the space bar when you are ready to begin' % self.autWait, 'space')
         for i in range(self.autRounds):
             self.marker(10 + i)
             self.write(self.autGroup2b[i], self.autWait, scale=0.5)
             self.sleep(2)
+
+        self.marker('Post')
+        self.write('Please relax while the headset finishes collecting data.\nThe process should take about 2-minutes.', 10)
+        self.sleep(110)
 
         self.write('Please notify us that you have finished the experiment. Thank you.', 5)
