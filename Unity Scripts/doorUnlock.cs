@@ -77,8 +77,6 @@ public class doorUnlock : MonoBehaviour
 	// Update is called once per frame
 	void Update() 
 	{
-
-
 		if (player.GetComponent<iPickYouUp> () != null) {
 			handsAreFull = player.GetComponent<iPickYouUp> ().handsAreFull;
 			canUnlock = player.GetComponent<iPickYouUp> ().hasKey;

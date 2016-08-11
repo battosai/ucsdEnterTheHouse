@@ -8,9 +8,11 @@ using LSL;
 
 public class trackPlayer : MonoBehaviour {
 	public int scenario;
+	public AudioClip ding;
 
 	float marker;
 
+	AudioSource stereo;
 	iPickYouUp narrowPickUpScript;
 	bool contRun1, contRun2, contRun3, contRun4;
 
@@ -20,6 +22,7 @@ public class trackPlayer : MonoBehaviour {
 
 	void Awake()
 	{
+		stereo = GameObject.FindWithTag("SoundFX").GetComponent<AudioSource>();
 		narrowPickUpScript = GameObject.FindWithTag ("Player").GetComponent<iPickYouUp>();
 	}
 
@@ -51,6 +54,7 @@ public class trackPlayer : MonoBehaviour {
 	{
 		if (Input.GetKeyDown (KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) 
 		{
+			stereo.PlayOneShot (ding, 1);
 			outl.push_sample (strings);
 			marker++;
 		}
