@@ -7,19 +7,19 @@ Speculation of whether or not the narrow scenario "limits" or "less effectively 
 
 **TO RUN:** In the "Data Files" directory of this repository, there are two zip files that correspond to the two scenarios. Note that these are made for 64-bit machines. Unzip the files wherever you'd like and run the executable inside. This should work as long as the data folder is in the same directory as the executable if you need to move them around.
 
-#SNAP: Simulation and Neuroscience Application Platform
+# SNAP: Simulation and Neuroscience Application Platform
 Link to repository: https://github.com/sccn/SNAP
 
 I created a simple test module using SNAP that gives a visual for the RAT and AUT (RAUT) tests that are used in this experiment. Here are two links for information about the Remote Associates Test (RAT) and the Alternative Uses Test (AUT) respectively.
 * RAT: http://www.creativehuddle.co.uk/the-remote-associates-test
 * AUT: http://www.creativehuddle.co.uk/the-alternative-uses-test
  
-#LSL: Lab Streaming Layer
+# LSL: Lab Streaming Layer
 Link to repository: https://github.com/sccn/labstreaminglayer
 
 Using the LSL library, we were able to achieve real-time sensor data streaming between Unity 3D and the Emotiv EEG headset that participants wore during the experiment.
 
-#Scenario Scripts
+# Scenario Scripts
 Both: PlayerController, CameraController_Mouse, pickMeUp, doorUnlock, trackPlayer
 
 Broad: entryPoints, broadPickup, iThrowYou, impactSounds, axeSwing, liftController, liftMeUp, trapdoorBlocked, windowBreak, LadderSnap
